@@ -11,7 +11,7 @@ router.post(
     '/',
     async (req, res, next) => {
       const { credential, password } = req.body;
-        console.log(req.body.password);
+        // console.log(req.body.password);
       const user = await User.login({ credential, password });
   
       if (!user) {
@@ -29,5 +29,15 @@ router.post(
       });
     }
   );
+
+  // Log out
+router.delete(
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+  }
+);
+
 
 module.exports = router;
