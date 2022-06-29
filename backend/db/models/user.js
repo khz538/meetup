@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       return { id, username, email };
     }
     
-    validatePassword() {
+    validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
 

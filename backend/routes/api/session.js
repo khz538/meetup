@@ -1,7 +1,7 @@
 // backend/routes/api/session.js
 const express = require('express');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.post(
     '/',
     async (req, res, next) => {
       const { credential, password } = req.body;
-  
+        console.log(req.body.password);
       const user = await User.login({ credential, password });
   
       if (!user) {
