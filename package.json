@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "pg": "^8.7.3"
+  },
+  "name": "authenticate-me",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khz538/meetup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khz538/meetup/issues"
+  },
+  "homepage": "https://github.com/khz538/meetup#readme",
+  "description": ""
+}
