@@ -67,7 +67,8 @@ ALTER TABLE
 CREATE TABLE "images"(
     "id" INTEGER NOT NULL,
     "eventId" INTEGER NULL,
-    "groupId" INTEGER NULL
+    "groupId" INTEGER NULL,
+    "url" TEXT NOT NULL
 );
 ALTER TABLE
     "images" ADD PRIMARY KEY("id");
