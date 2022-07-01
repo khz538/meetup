@@ -2,19 +2,7 @@
 
 ## Database Schema Design
 
-`
-CREATE TABLE users (
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    first_name TEXT NOT NULL UNIQUE,
-    last_name
-    email TEXT NOT NULL UNIQUE,
-    hashedPassword TEXT NOT NULL,
-    image TEXT NOT NULL
-);
-CREATE TABLE groups (
-    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
-    username 
-);`
+![](schema/drawSQL-export-2022-06-30_16_36.png)
 
 ## API Documentation
 
