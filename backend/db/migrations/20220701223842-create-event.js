@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       startDate: {
         type: Sequelize.DATE
@@ -37,6 +37,9 @@ module.exports = {
       },
       numAttending: {
         type: Sequelize.INTEGER
+      },
+      previewImage: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

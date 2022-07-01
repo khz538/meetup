@@ -20,30 +20,42 @@ module.exports = (sequelize, DataTypes) => {
     },
     venueId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     description: {
       type: DataTypes.STRING,
     },
     type: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     capacity: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     price: {
       type: DataTypes.FLOAT,
+      allowNull: false,
     },
     startDate: {
       type: DataTypes.DATE,
+      allowNull: false,
     },
     endDate: {
       type: DataTypes.DATE,
+      allowNull: false,
     },
     numAttending: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    previewImage: {
+      type: DataTypes.STRING,
     },
   }, {
     sequelize,

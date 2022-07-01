@@ -8,7 +8,7 @@ npx sequelize model:generate --name Group --attributes organizerId:integer,name:
 npx sequelize model:generate --name GroupMember --attributes userId:integer,groupId:integer,membershipStatus:string
 
 # Generate Event model & migration
-npx sequelize model:generate --name Event --attributes groupId:integer,venueId:integer,name:string,description:string,type:string,capacity:integer,price:float,startDate:date,endDate:date,numAttending:integer
+npx sequelize model:generate --name Event --attributes groupId:integer,venueId:integer,name:string,description:string,type:string,capacity:integer,price:float,startDate:date,endDate:date,numAttending:integer,previewImage:string
 
 # Generate Venue model & migration
 npx sequelize model:generate --name Venue --attributes address:string,city:string,state:string,latitude:float,longitude:float

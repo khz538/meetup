@@ -42,7 +42,8 @@ CREATE TABLE "events"(
     "price" INTEGER NOT NULL,
     "startDate" DATE NOT NULL,
     "endDate" DATE NOT NULL,
-    "numAttending" INTEGER NOT NULL
+    "numAttending" INTEGER NOT NULL,
+    "previewImage" TEXT NOT NULL
 );
 ALTER TABLE
     "events" ADD PRIMARY KEY("id");
