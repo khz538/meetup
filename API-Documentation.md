@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![](schema/drawSQL-export-2022-07-01_15_00.png)
+![](backend/schema/drawSQL-export-2022-07-01_16_43.png)
 
 ## API Documentation
 
@@ -50,7 +50,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /users/:userid
+  * URL: /users/currentUser
   * Body: none
 
 * Successful Response
@@ -76,7 +76,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/login
+  * URL: /sessions/
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -250,7 +250,7 @@ Returns all the groups.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /groups/users/:userid
+  * URL: /users/currentUser/groups
   * Body: none
 
 * Successful Response
@@ -881,7 +881,7 @@ Returns all the events of a group specified by its id
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events/groups/:groupsId
+  * URL: /groups/:groupId/events
   * Body: none
 
 * Successful Response
@@ -1020,7 +1020,7 @@ Creates and returns a new venue for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /venues/groups/:groupId
+  * URL: /groups/:groupId/venues
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1170,7 +1170,7 @@ Creates and returns a new event for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /events/groups/:groupId
+  * URL: /groups/:groupId/events
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1548,7 +1548,7 @@ Change the status of an attendance for an event specified by id.
   have a membership to the group with the status of "co-host"
 * Request
   * Method: PUT
-  * URL: events/:eventId/users/:userId
+  * URL: events/:eventId/attendees/:userId
   * Headers:
     * Content-Type: application/json
   * Body:

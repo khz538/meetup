@@ -27,7 +27,7 @@ CREATE TABLE "group_members"(
     "id" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     "groupId" INTEGER NOT NULL,
-    "status" TEXT NOT NULL
+    "membershipStatus" TEXT NOT NULL
 );
 ALTER TABLE
     "group_members" ADD PRIMARY KEY("id");
@@ -49,7 +49,8 @@ ALTER TABLE
 CREATE TABLE "event_attendees"(
     "id" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
-    "eventId" INTEGER NOT NULL
+    "eventId" INTEGER NOT NULL,
+    "attendingStatus" TEXT NOT NULL
 );
 ALTER TABLE
     "event_attendees" ADD PRIMARY KEY("id");
