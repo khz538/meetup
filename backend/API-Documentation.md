@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![](schema/drawSQL-export-2022-06-30_16_36.png)
+![](schema/drawSQL-export-2022-07-01_15_00.png)
 
 ## API Documentation
 
@@ -1661,7 +1661,7 @@ Create and return a new image for a group specified by id.
 * Require proper authorization: Current User must be the organizer for the group
 * Request
   * Method: POST
-  * URL: /groups/:groupId
+  * URL: /groups/:groupId/image
   * Headers:
     * Content-Type: application/json
   * Body:
