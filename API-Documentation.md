@@ -250,7 +250,7 @@ Returns all the groups.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /users/currentUser/groups
+  * URL: /user/currentUser
   * Body: none
 
 * Successful Response
