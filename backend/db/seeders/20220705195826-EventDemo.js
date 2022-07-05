@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Groups', [
+    return queryInterface.bulkInsert('Events', [
       {
         groupId: 1,
         venueId: 1,
@@ -47,7 +47,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Groups', {
+    return queryInterface.bulkDelete('Events', {
       name: { [Op.in]: ["Kevin's Event", "Hansen's Event", "Dan's Event"] }
     }, {});
   }
