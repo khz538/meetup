@@ -17,23 +17,23 @@ module.exports = (sequelize, DataTypes) => {
   Venue.init({
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     latitude: {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      // allowNull: false,
     },
     longitude: {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      // allowNull: false,
     },
   }, {
     sequelize,

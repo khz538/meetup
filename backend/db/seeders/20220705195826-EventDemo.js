@@ -23,7 +23,7 @@ module.exports = {
         description: "graduation party!",
         type: "in-person",
         capacity: 50,
-        price: 0,
+        price: 5.00,
         startDate: '2023-07-16',
         endDate: '2023-07-17',
         numAttending: 35,
