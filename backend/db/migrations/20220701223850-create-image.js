@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       eventId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Events" },
       },
       groupId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Groups" },
       },
       url: {
         type: Sequelize.STRING
