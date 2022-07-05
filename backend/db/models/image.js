@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       Image.belongsTo(models.Event, {
-        foreignKey: "groupId",
+        foreignKey: "eventId",
         onDelete: "CASCADE",
       });
     }
