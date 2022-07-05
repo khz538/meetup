@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   Image.init({
     eventId: DataTypes.INTEGER,
     groupId: DataTypes.INTEGER,
-    url: DataTypes.STRING
+    url: { type: DataTypes.STRING, allowNull: false }
   }, {
     sequelize,
     modelName: 'Image',
