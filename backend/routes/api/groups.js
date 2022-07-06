@@ -150,6 +150,28 @@ router.post('/', checkAuth, async (req, res) => {
     }
 });
 
+// Delete a group
+router.delete('/:groupId', checkAuth, async (req, res) => {
+    const { groupId } = req.params;
+    const group = await Group.findByPk(groupId);
+    if (!group) {
+        return res.status(404).json({
+            message: 'Group couldn\'t be found',
+            statusCode: 404
+        });
+    }
+    const user = await User.findByPk(req.user.id);
+    if (group.organizerId !== user.id) {
+        console.log(req.user.id);
+        throw new Error('Not authorized');
+    }
+    await group.destroy();
+    return res.json({
+        message: 'Successfully deleted',
+        statusCode: 200
+    });
+});
+
 // Get all groups
 router.get(
     '/',
