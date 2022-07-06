@@ -19,7 +19,7 @@ router.get(
         groups.forEach(group => {
             result.push(group.Group);
         });
-        return res.json({ Group: result});
+        return res.json({ Group: result });
     }    
 )
 

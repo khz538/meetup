@@ -213,7 +213,7 @@ Returns all the groups.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups
+  * URL: api/groups
   * Body: none
 
 * Successful Response
@@ -250,7 +250,7 @@ Returns all the groups.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /user/currentUser
+  * URL: api/user/current
   * Body: none
 
 * Successful Response
@@ -287,7 +287,7 @@ Returns the details of a group specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups/:groupid
+  * URL: api/groups/:groupid
   * Body: none
 
 * Successful Response
@@ -340,7 +340,7 @@ Creates and returns a new group.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /groups
+  * URL: api/groups
   * Headers:
     * Content-Type: application/json
   * Body:
