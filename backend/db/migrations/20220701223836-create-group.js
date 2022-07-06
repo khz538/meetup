@@ -14,7 +14,7 @@ module.exports = {
         references: { model: "Users" },
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(60),
         allowNull: false,
         unique: true,
       },
@@ -37,7 +37,6 @@ module.exports = {
       },
       numMembers: {
         type: Sequelize.INTEGER,
-        allowNull: false,
       },
       previewImage: {
         type: Sequelize.STRING,

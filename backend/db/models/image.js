@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Image',
+    defaultScope: {
+      attributes: {
+        include: ['url']
+      }
+    },
   });
   return Image;
 };

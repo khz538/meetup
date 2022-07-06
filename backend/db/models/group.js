@@ -23,16 +23,27 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(60),
       allowNull: false,
       unique: true,
     },
     about: {
       type: DataTypes.STRING,
+      validate: {
+        len: [50, 9999]
+      }
     },
     type: {
       type: DataTypes.STRING,
       allowNull:false,
+      validate: {
+        isIn: [['Online', 'In person']],
+        // onlineOrInPerson(value) {
+        //   if (value !== 'Online' && value !=='In person') {
+        //     throw new Error('Type must be Online or In person');
+        //   }
+        // }
+      }
     },
     private: {
       type: DataTypes.BOOLEAN,
@@ -46,7 +57,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     numMembers: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     previewImage: {
       type: DataTypes.STRING,
