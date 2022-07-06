@@ -3,42 +3,47 @@ const express = require("express");
 const { Group, GroupMember } = require('../../db/models');
 const router = express.Router();
 
-// router.get(
-//     '/users/currentUser',
-//     async (req, res) => {
-//         if (!req.user) {
-//             throw new Error ('must be logged in');
-//         }
-//         const userId = req.user.id;
-//         const groups = await GroupMember.findAll({
-//             include: [{ model: Group }],
-//             where: { userId },
-//         });
-//         return res.json(groups);
-//     }    
-// )
-
-router.get('/users/current', async (req, res, next) => {
-    if (!req.user) {
-        const err = new Error('No log In')
-        next(err)
-    }
-
-    const userId = req.user.id;
-    const groups = await GroupMember.findAll({
-        include: [{model: Group}],
-        where: {
-            userId
+router.get(
+    '/users/current',
+    async (req, res) => {
+        if (!req.user) {
+            throw new Error ('must be logged in');
         }
-    })
+        const userId = req.user.id;
+        const groups = await GroupMember.findAll({
+            include: [{ model: Group }],
+            where: { userId },
+        });
 
-    const result = {Groups:[]}
-    groups.forEach(element => {
-        result.Groups.push(element.Group)
+        const result = [];
+        groups.forEach(group => {
+            result.push(group.Group);
+        });
+        return res.json({ Group: result});
+    }    
+)
+
+// router.get('/users/current', async (req, res, next) => {
+//     if (!req.user) {
+//         const err = new Error('No log In')
+//         next(err)
+//     }
+
+//     const userId = req.user.id;
+//     const groups = await GroupMember.findAll({
+//         include: [{model: Group}],
+//         where: {
+//             userId
+//         }
+//     })
+
+//     const result = {Groups:[]}
+//     groups.forEach(element => {
+//         result.Groups.push(element.Group)
         
-    });
-    res.json(result)
-})
+//     });
+//     res.json(result)
+// })
 
 router.get(
     '/',
