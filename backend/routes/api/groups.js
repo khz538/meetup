@@ -37,6 +37,7 @@ router.get('/:groupId/members', async (req, res) => {
     return res.json(groupMember);
 });
 
+// Get all Groups joined or organized by the Current User
 router.get(
     '/users/current',
     checkAuth,

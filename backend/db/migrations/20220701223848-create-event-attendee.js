@@ -11,10 +11,12 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         references: { model: "Users" },
+        onDelete: 'cascade'
       },
       eventId: {
         type: Sequelize.INTEGER,
         references: { model: "Events" },
+        onDelete: 'cascade',
       },
       attendingStatus: {
         type: Sequelize.STRING
