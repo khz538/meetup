@@ -18,6 +18,24 @@ const checkAuth = (req, res, next) => {
         next();
     }
 }
+// Get all Members of a Group specified by its id
+router.get('/:groupId/members', async (req, res) => {
+    const { groupId } = req.params;
+    const groupMember = await User.findAll({
+        include: [{
+            model: Group,
+            where: {
+                id: groupId
+            },
+            attributes: [],
+            },
+            // {
+            //     model: GroupMember, as: 'Membership'}
+        ],
+    });
+    console.log(groupMember);
+    return res.json(groupMember);
+});
 
 router.get(
     '/users/current',
