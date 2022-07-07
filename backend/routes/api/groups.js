@@ -156,7 +156,7 @@ router.put('/:groupId', checkAuth, async (req, res) => {
 });
 
 // Change the status of the membership for a group specified by id
-router.put('/:groupId/members/change', checkAuth, async (req, res) => {
+router.put('/:groupId/members', checkAuth, async (req, res) => {
     const { groupId } = req.params;
     const { memberId, status } = req.body;
     const group = await Group.findAll({
@@ -170,20 +170,26 @@ router.put('/:groupId/members/change', checkAuth, async (req, res) => {
             statusCode: 404
         });
     }
-    let targetMember = await GroupMember.findOne({
-        where: { userId: memberId, groupId },
-        attributes: [
-            'id',
-            'userId',
-            'groupId',
-            'membershipStatus'
-        ]
+    const currentUser = await GroupMember.findOne({
+        where: {
+            groupId,
+            userId: req.user.id
+        }
     });
-    console.log(targetMember)
+    let targetMember = await GroupMember.findOne({
+        where: { userId: memberId, groupId }
+    });
+    if (!targetMember) {
+        return res.status(404).json({
+            message: "Membership between the user and the group does not exist",
+            statusCode: 404
+        });
+    }
+    if (currentUser.membershipStatus == "co-host")
     targetMember.userId = memberId;
     targetMember.membershipStatus = status;
     console.log(targetMember.id);
-    await targetMember.save();
+    // await targetMember.save();
     return res.json(targetMember);
 });
 
