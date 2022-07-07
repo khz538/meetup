@@ -18,6 +18,16 @@ module.exports = {
         groupId: 3,
         membershipStatus: "waitlist"
       },
+      {
+        userId: 1,
+        groupId: 3,
+        membershipStatus: "co-host"
+      },
+      {
+        userId: 2,
+        groupId: 3,
+        membershipStatus: "member"
+      },
     ], {});
   },
 

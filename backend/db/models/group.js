@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Group.belongsToMany(models.User, {
-        through: models.GroupMember,
-        // as: "Membership"
-      });
+      // Group.belongsToMany(models.User, {
+      //   through: models.GroupMember,
+        //  // as: "Membership"
+      // });
       Group.belongsTo(models.User, { foreignKey: "organizerId" });
       Group.hasMany(models.Image, { foreignKey: "groupId",
         onDelete: "CASCADE", as: "Image"

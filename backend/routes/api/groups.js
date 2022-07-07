@@ -19,6 +19,17 @@ const checkAuth = (req, res, next) => {
         next();
     }
 }
+
+// const findGroup = (req, res, next) => {
+//     try {
+//         const groupId = req.params.groupId;
+//         const group = await Group.findByPk(groupId);
+//         next()
+//     } catch (err) {
+//         res.status(404);
+        
+//     }
+// }
 // Get all Members of a Group specified by its id
 router.get('/:groupId/members', async (req, res) => {
     const { groupId } = req.params;
@@ -159,25 +170,50 @@ router.put('/:groupId', checkAuth, async (req, res) => {
 router.put('/:groupId/members', checkAuth, async (req, res) => {
     const { groupId } = req.params;
     const { memberId, status } = req.body;
-    const group = await Group.findAll({
-        where: {
-            id: groupId
-        },
-    });
+    const group = await Group.findByPk(groupId);
+    console.log(group)
     if (!group) {
         res.status(404).json({
             message: "Group couldn't be found",
             statusCode: 404
         });
     }
-    const currentUser = await GroupMember.findOne({
-        where: {
-            groupId,
-            userId: req.user.id
-        }
-    });
+    // const currentUser = await GroupMember.findOne({
+    //     where: {
+    //         groupId,
+    //         userId: req.user.id
+    //     }
+    // });
+    const currentUser = req.user;
+    if (!currentUser) {
+        return res.status(400).json({
+            message: "Current User must be the organizer or a co-host to make someone a member",
+            statusCode: 400
+        })
+    }
+    
+    // if (status === "co-host" && req.user.id !== group.organizerId) {
+    //     return res.status(403).json({
+    //         message: 'Current User must be the organizer to add a co-host',
+    //         statusCode: 403
+    //     });
+    // }
+    const userId = req.user.id;
+    console.log(status === "co-host");
+    console.log(req.user.id, group.organizerId)
+    if (group.organizerId !== userId && status === "co-host") {
+        return res.status(403).json({
+            "message": "Current User must be the organizer to add a co-host",
+            "statusCode": 403
+        })
+    };
     let targetMember = await GroupMember.findOne({
-        where: { userId: memberId, groupId }
+        where: { 
+            [Op.and]: [
+                { userId: memberId },
+                { groupId: groupId }
+            ]
+         }
     });
     if (!targetMember) {
         return res.status(404).json({
@@ -185,11 +221,27 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
             statusCode: 404
         });
     }
-    if (currentUser.membershipStatus == "co-host")
-    targetMember.userId = memberId;
+    const currentUserStatus = await GroupMember.findOne({
+        where: {groupId, userId}
+    });
+    if (status == "member") {
+        if (req.user.id !== group.organizerId || currentUserStatus.membershipStatus !== "co-host" ) {
+            return res.status(400).json({
+                message: "Current User must be the organizer or a co-host to make someone a member",
+                statusCode: 400
+            });
+        }
+    }
+    if (status == "pending") {
+        return res.status(400).json({
+            message: "Cannot change a membership status to pending",
+            statusCode: 400
+        });
+    }
+
     targetMember.membershipStatus = status;
-    console.log(targetMember.id);
-    // await targetMember.save();
+    // console.log(targetMember.id);
+    await targetMember.save();
     return res.json(targetMember);
 });
 
@@ -278,6 +330,34 @@ router.post('/', checkAuth, async (req, res) => {
                 state: 'State is required',
             }
         });
+    }
+});
+
+// Delete membership to a group specified by id
+router.delete('/:groupId/members/:memberId', checkAuth, async (req, res) => {
+    let { groupId, memberId } = req.params;
+    groupId = parseInt(groupId);
+    memberId = parseInt(memberId);
+    const group = await Group.findByPk(groupId);
+    const currentUser = req.user;
+    console.log('currentUser.id',currentUser.id);
+    console.log('group organizer id', group.organizerId);
+    const targetMember = await GroupMember.findOne({
+        where: { groupId, userId: memberId },
+    });
+    console.log('targetMember.userId', targetMember.userId);
+    if (!group) {
+        return res.status(404).json({
+            message: "Group couldn't be found",
+            statusCode: 404
+        });
+    } else if (currentUser.id === group.organizerId || currentUser.id === targetMember.userId) {
+        await targetMember.destroy();
+        return res.json({
+            message: "Successfully deleted membership from group"
+        });
+    } else {
+        throw new Error('Current user must be the host of the group or the user whose membership is being deleted');
     }
 });
 
