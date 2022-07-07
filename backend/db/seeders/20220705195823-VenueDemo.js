@@ -41,25 +41,28 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Venues', [
     {
+      groupId: 2,
       address: 'AAA',
       city: 'Baltimore',
       state: 'MD',
-      latitude: 18.783212,
-      longitude: 60.82393,
+      lat: 18.783212,
+      lng: 60.82393,
     },
     {
+      groupId: 1,
       address: 'BBB',
       city: 'New York',
       state: 'NY',
-      latitude: 19.783212,
-      longitude: 67.82393,
+      lat: 19.783212,
+      lng: 67.82393,
     },
     {
+      groupId: 3,
       address: 'CCC',
       city: 'Chicago',
       state: 'IL',
-      latitude: 16.783212,
-      longitude: 50.82393,
+      lat: 16.783212,
+      lng: 50.82393,
     }
     ], {});
   },

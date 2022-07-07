@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      groupId: {
+        type: Sequelize.INTEGER,
+      },
       address: {
         type: Sequelize.STRING,
         // allowNull: false,
@@ -20,11 +23,11 @@ module.exports = {
         type: Sequelize.STRING,
         // allowNull: false,
       },
-      latitude: {
+      lat: {
         type: Sequelize.FLOAT,
         // allowNull: false,
       },
-      longitude: {
+      lng: {
         type: Sequelize.FLOAT,
         // allowNull: false,
       },

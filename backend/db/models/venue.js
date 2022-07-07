@@ -15,29 +15,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Venue.init({
+    groupId: {
+      type: DataTypes.STRING,
+    },
     address: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: false,
     },
     city: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: false,
     },
     state: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: false,
     },
-    latitude: {
+    lat: {
       type: DataTypes.FLOAT,
-      // allowNull: false,
+      validate: {
+        min: -90,
+        max: 90,
+        isFloat: true
+      }
     },
-    longitude: {
+    lng: {
       type: DataTypes.FLOAT,
-      // allowNull: false,
+      validate: {
+        min: -180,
+        max: 180,
+      }
     },
   }, {
     sequelize,
     modelName: 'Venue',
+    defaultScope: {
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    }
   });
   return Venue;
 };

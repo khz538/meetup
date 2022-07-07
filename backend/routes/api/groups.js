@@ -30,6 +30,7 @@ const checkAuth = (req, res, next) => {
         
 //     }
 // }
+
 // Get all Members of a Group specified by its id
 router.get('/:groupId/members', async (req, res) => {
     const { groupId } = req.params;
@@ -199,8 +200,8 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
     //     });
     // }
     const userId = req.user.id;
-    console.log(status === "co-host");
-    console.log(req.user.id, group.organizerId)
+    // console.log(status === "co-host");
+    // console.log(req.user.id, group.organizerId)
     if (group.organizerId !== userId && status === "co-host") {
         return res.status(403).json({
             "message": "Current User must be the organizer to add a co-host",
