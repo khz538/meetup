@@ -1,5 +1,6 @@
 // backend/routes/api/groups.js
 const express = require("express");
+const { Op } = require("sequelize");
 const { check } = require("express-validator");
 const { Group,
         GroupMember,
@@ -21,20 +22,41 @@ const checkAuth = (req, res, next) => {
 // Get all Members of a Group specified by its id
 router.get('/:groupId/members', async (req, res) => {
     const { groupId } = req.params;
-    const groupMember = await User.findAll({
-        include: [{
-            model: Group,
-            where: {
-                id: groupId
-            },
-            attributes: [],
-            },
-            // {
-            //     model: GroupMember, as: 'Membership'}
-        ],
-    });
-    console.log(groupMember);
-    return res.json(groupMember);
+    const group = await Group.findByPk(groupId);
+    if (!group) res.status(404).json({message: 'Group couldn\'t be found', statusCode: 404});
+    if (group.organizerId === req.user.id) {
+        const groupMembers = await User.findAll({
+            attributes: ["id", "firstName", "lastName"],
+            include: [{
+                model: GroupMember,
+                // model: Group,
+                where: {
+                    groupId
+                },
+                attributes: ["membershipStatus"],
+                },
+                // {
+                //     model: GroupMember, as: 'Membership'}
+            ],
+        });
+        console.log(groupMembers);
+        return res.json({Members: groupMembers});
+    } else {
+        const groupMembers = await User.findAll({
+            attributes: ["id", "firstName", "lastName"],
+            include: [{
+                model: GroupMember, as: "Membership",
+                where: {
+                    groupId,
+                    membershipStatus: {
+                        [Op.notIn]: ["pending"],
+                    }
+                },
+                attributes: ["membershipStatus"],
+            }]
+        });
+        return res.json({Members: groupMembers})
+    }
 });
 
 // Get all Groups joined or organized by the Current User
@@ -132,6 +154,90 @@ router.put('/:groupId', checkAuth, async (req, res) => {
         });
     }
 });
+
+// Change the status of the membership for a group specified by id
+router.put('/:groupId/members/change', checkAuth, async (req, res) => {
+    const { groupId } = req.params;
+    const { memberId, status } = req.body;
+    const group = await Group.findAll({
+        where: {
+            id: groupId
+        },
+    });
+    if (!group) {
+        res.status(404).json({
+            message: "Group couldn't be found",
+            statusCode: 404
+        });
+    }
+    let targetMember = await GroupMember.findOne({
+        where: { userId: memberId, groupId },
+        attributes: [
+            'id',
+            'userId',
+            'groupId',
+            'membershipStatus'
+        ]
+    });
+    console.log(targetMember)
+    targetMember.userId = memberId;
+    targetMember.membershipStatus = status;
+    console.log(targetMember.id);
+    await targetMember.save();
+    return res.json(targetMember);
+});
+
+// Request a Membership for a Group based on the Group's id
+router.post('/:groupId/join', checkAuth, async (req, res) => {
+    let { groupId } = req.params;
+    groupId = parseInt(groupId);
+    const group = await Group.findByPk(groupId);
+    // error if group doesn't exist
+    if (!group) {
+        res.status(404).json({
+            message: "Group couldn't be found",
+            statusCode: 404
+        });
+    }
+
+    // error if user is already accepted
+    const userIds = await GroupMember.findAll({
+        attributes: ['userId', 'membershipStatus'],
+        where: { groupId },
+    });
+    let arr = [];
+    userIds.forEach(user => {
+        arr.push([user.dataValues.userId, user.dataValues.membershipStatus]);
+    });
+    for (let el of arr) {
+        console.log(el[0], el[1]);
+        if (el[0] === req.user.id) {
+            if (el[1] === 'pending') {
+                return res.status(400).json({
+                    message: "Membership has already been requested",
+                    statusCode: 400
+                });
+            } else if (el[1] === 'member') {
+                return res.status(400).json({
+                    message: "User is already a member of the group",
+                    statusCode: 400
+                });
+            }
+        }
+    }
+    
+    const userId = req.user.id;
+    const newMember = await GroupMember.create({
+        groupId,
+        userId,
+        membershipStatus: "pending"
+    });
+    return res.json({
+        groupId: groupId,
+        memberId: userId,
+        status: "pending"
+    });
+})
 
 // Create a group
 router.post('/', checkAuth, async (req, res) => {
