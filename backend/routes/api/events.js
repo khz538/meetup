@@ -148,8 +148,8 @@ router.get('/:eventId/attendees', async (req, res, next) => {
             const eventAttendees = await User.findAll({
                 attributes: [
                     'id',
-                    'firstname',
-                    'lastname',
+                    'firstName',
+                    'lastName',
                 ],
                 include: [{
                     model: EventAttendee,
@@ -165,11 +165,11 @@ router.get('/:eventId/attendees', async (req, res, next) => {
             const eventAttendees = await User.findAll({
                 attributes: [
                     'id',
-                    'firstname',
-                    'lastname',
+                    'firstName',
+                    'lastName',
                 ],
                 include: [{
-                    model: EventAttendee, as: "Attendance",
+                    model: EventAttendee,
                     where: {
                         eventId,
                         attendingStatus: {
@@ -182,6 +182,56 @@ router.get('/:eventId/attendees', async (req, res, next) => {
             return res.json({Attendees: eventAttendees});
         }
     }
+});
+
+// Request to Attend an Event based on Event's id
+router.post('/:eventId/join', checkAuth, async (req, res, next) => {
+    let {eventId} = req.params; eventId = parseInt(eventId);
+    const event = await Event.findByPk(eventId);
+    const userId = req.user.id;
+    if (!event) {
+        res.status(404).json({
+            message: "Event couldn't be found",
+            statusCode: 404,
+        });
+    }
+    // Return error if attendance has already been request
+    // or user is already attending
+
+    const userIds = await EventAttendee.findAll({
+        attributes: ['userId', 'attendingStatus'],
+        where: {eventId},
+    });
+    let arr = [];
+    userIds.forEach(user => {
+        arr.push([user.dataValues.userId, user.dataValues.attendingStatus]);
+    });
+    for (let el of arr) {
+        console.log(el[0], el[1]);
+        if (el[0] === req.user.id) {
+            if (el[1] === 'pending') {
+                return res.status(400).json({
+                    message: "Attendance has already been requested",
+                    statusCode: 400
+                });
+            } else if (el[1] === 'member') {
+                return res.status(400).json({
+                    message: "User is already an attendee of the event",
+                    statusCode: 400
+                });
+            }
+        }
+    }
+    const newAttendee = await EventAttendee.create({
+        eventId,
+        userId,
+        attendingStatus: "pending"
+    });
+    return res.json({
+        eventId: eventId,
+        memberId: userId,
+        status: "pending"
+    });
 })
 
 // Get all events
