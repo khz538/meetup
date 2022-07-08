@@ -444,15 +444,73 @@ router.get('/:eventId', async (req, res, next) => {
     return res.json(eventJSON);
 });
 
+
 // Get all events
 router.get('/', async (req, res, next) => {
-    const events = await Event.findAll({
-        include: [
-            { model: Group },
-            { model: Venue }
-        ]
-    });
-    return res.json({Events: events});
+    // add Query filters
+    let pagination = {};
+    let { page, size, name, type, startDate } = req.query;
+    let where = {};
+    if (type) {
+        if (type !== 'Online' || type !== 'In person') {
+            return res.status(400).json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    page: "Page must be greater than or equal to 0",
+                    size: "Size must be greater than or equal to 0",
+                    name: "Name must be a string",
+                    type: "Type must be 'Online' or 'In Person'",
+                    startDate: "Start date must be a valid datetime",
+                }
+            });
+        }
+    }
+    if (name) where.name = name;
+    if (type) where.type = type;
+    if (startDate) where.startDate = startDate;
+    if (page > 10 || size > 20) {
+        return res.status(400).json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+                page: "Page must be greater than or equal to 0",
+                size: "Size must be greater than or equal to 0",
+                name: "Name must be a string",
+                type: "Type must be 'Online' or 'In Person'",
+                startDate: "Start date must be a valid datetime",
+            }
+        });
+    }
+    page = page === undefined ? 0 : parseInt(page);
+    size = size === undefined ? 20 : parseInt(size);
+    if (size >= 1 && page >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+    try {
+        const events = await Event.findAll({
+            include: [
+                { model: Group, attributes: ['id', 'name', 'city', 'state'] },
+                { model: Venue, attributes: ['id', 'city', 'state'] }
+            ],
+            where,
+            ...pagination,
+        });
+        return res.json({Events: events});
+    } catch (err) {
+        return res.status(400).json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+                page: "Page must be greater than or equal to 0",
+                size: "Size must be greater than or equal to 0",
+                name: "Name must be a string",
+                type: "Type must be 'Online' or 'In Person'",
+                startDate: "Start date must be a valid datetime",
+            }
+        });
+    }
 });
 
 module.exports = router;
