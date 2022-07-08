@@ -22,6 +22,10 @@ module.exports = {
         references: { model: "Groups" },
         onDelete: 'cascade'
       },
+      imageableType: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       url: {
         type: Sequelize.STRING
       },

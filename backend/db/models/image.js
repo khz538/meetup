@@ -46,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    imageableType: {
+      type: DataTypes.STRING,
+      validate: {
+        isIn: ['Event', 'Group'],
+      }
+    },
     url: { type: DataTypes.STRING, allowNull: false }
   }, {
     sequelize,
