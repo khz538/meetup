@@ -310,7 +310,7 @@ router.delete('/:eventId/attendees/:attendeeId', checkAuth, async (req, res, nex
     //         message: "Successfully deleted attendance from event"
     //     });
     if (group.organizerId == currentUser.id ||
-        currentUser.id == targetAttendee.userId 
+        currentUser.id == targetAttendee.userId
         || currentUserStatus.membershipStatus == "co-host"
     ) {
             await event.destroy();
@@ -322,7 +322,6 @@ router.delete('/:eventId/attendees/:attendeeId', checkAuth, async (req, res, nex
                 "Current user must be the host of the group or the user whose attendance is being deleted"
             );
         }
-        
 });
 
 // Get all events
