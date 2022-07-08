@@ -76,14 +76,14 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /sessions/
+  * URL: api/session
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "email": "john.smith@gmail.com",
+      "credential": "john.smith@gmail.com",
       "password": "secret password"
     }
     ```
@@ -142,16 +142,17 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/join
+  * URL: api/users/join
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@gmail.com",
+      "firstName": "Josh",
+      "lastName": "Smitty",
+      "username": "jsmoove2",
+      "email": "josh.smitty2@gmail.com",
       "password": "secret password"
     }
     ```
@@ -352,7 +353,7 @@ Creates and returns a new group.
       "type": "In person",
       "private": true,
       "city": "New York",
-      "state": "NY",
+      "state": "NY"
     }
     ```
 
@@ -459,7 +460,7 @@ Updates and returns an existing group.
         "type": "Type must be Online or In person",
         "private": "Private must be a boolean",
         "city": "City is required",
-        "state": "State is required",
+        "state": "State is required"
       }
     }
     ```
@@ -521,7 +522,7 @@ Returns the members of a group specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups/:groupid/members
+  * URL: api/groups/:groupid/members
   * Body: none
 
 * Successful Response: If you ARE the organizer of the group. Shows all
@@ -539,7 +540,7 @@ Returns the members of a group specified by its id.
           "firstName": "Clark",
           "lastName": "Adams",
           "Membership": {
-            "status": "co-host"
+            "membershipStatus": "co-host"
           },
         },
         {
@@ -547,7 +548,7 @@ Returns the members of a group specified by its id.
           "firstName": "John",
           "lastName": "Smith",
           "Membership": {
-            "status": "member"
+            "membershipStatus": "member"
           },
         },
         {
@@ -555,7 +556,7 @@ Returns the members of a group specified by its id.
           "firstName": "Jane",
           "lastName": "Doe",
           "Membership": {
-            "status": "pending"
+            "membershipStatus": "pending"
           },
         },
       ]
@@ -612,7 +613,7 @@ Request a new membership for a group specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /groups/:groupId/join
+  * URL: api/groups/:groupId/join
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -680,7 +681,7 @@ Change the status of a membership for a group specified by id.
   have a membership to the group with the status of "co-host"
 * Request
   * Method: PUT
-  * URL: /groups/:groupId/members/:memberId
+  * URL: api/groups/:groupId/members
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -783,7 +784,7 @@ Delete a membership to a group specified by id.
   the user whose membership is being deleted
 * Request
   * Method: DELETE
-  * URL: /groups/:groupId/members/:memberId
+  * URL: /api/groups/:groupId/members/:memberId
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -820,7 +821,7 @@ Returns all the events.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events
+  * URL: /api/events
   * Body: none
 
 * Successful Response
@@ -1020,7 +1021,7 @@ Creates and returns a new venue for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /groups/:groupId/venues
+  * URL: /api/venues/new/groups/:groupId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1095,7 +1096,7 @@ Edit a new venue specified by its id
   the group with a status of "co-host"
 * Request
   * Method: PUT
-  * URL: /venues/:venueId
+  * URL: /api/venues/:venueId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1170,7 +1171,7 @@ Creates and returns a new event for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /groups/:groupId/events/new
+  * URL: api/groups/:groupId/events/new
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1254,7 +1255,7 @@ Edit and returns an event specified by its id
   the group with a status of "co-host"
 * Request
   * Method: PUT
-  * URL: /events/:eventId
+  * URL: api/events/:eventId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1351,7 +1352,7 @@ Delete an event specified by its id
   the group with a status of "co-host"
 * Request
   * Method: DELETE
-  * URL: /events/:eventId
+  * URL: api/events/:eventId
   * Body: none
 
 * Successful Response
@@ -1386,7 +1387,7 @@ Returns the attendees of an event specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events/:eventId/attendees
+  * URL: /api/events/:eventId/attendees
   * Body: none
 
 * Successful Response: If you ARE the organizer of the group or a member of the
@@ -1404,24 +1405,24 @@ Returns the attendees of an event specified by its id.
           "id": 2,
           "firstName": "Clark",
           "lastName": "Adams",
-          "Attendance": {
-            "status": "member"
+          "eventAttendee": {
+            "attendingStatus": "member"
           },
         },
         {
           "id": 3,
           "firstName": "John",
           "lastName": "Smith",
-          "Attendance": {
-            "status": "waitlist"
+          "eventAttendee": {
+            "attendingStatus": "waitlist"
           },
         },
         {
           "id": 4,
           "firstName": "Jane",
           "lastName": "Doe",
-          "Attendance": {
-            "status": "pending"
+          "eventAttendee": {
+            "attendingStatus": "pending"
           },
         },
       ]
@@ -1443,16 +1444,16 @@ Returns the attendees of an event specified by its id.
           "id": 2,
           "firstName": "Clark",
           "lastName": "Adams",
-          "Attendance": {
-            "status": "member"
+          "EventAttendee": {
+            "attendingStatus": "member"
           },
         },
         {
           "id": 3,
           "firstName": "John",
           "lastName": "Smith",
-          "Attendance": {
-            "status": "waitlist"
+          "EventAttendee": {
+            "attendingStatus": "waitlist"
           },
         },
       ]
@@ -1480,7 +1481,7 @@ Request attendance for an event specified by id.
 * Require Authorization: Current User must be a member of the group
 * Request
   * Method: POST
-  * URL: /events/:eventId/join
+  * URL: api/events/:eventId/join
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -1548,7 +1549,7 @@ Change the status of an attendance for an event specified by id.
   have a membership to the group with the status of "co-host"
 * Request
   * Method: PUT
-  * URL: events/:eventId/attendees/:userId
+  * URL: /api/events/:eventId/attendees
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1623,7 +1624,7 @@ Delete an attendance to an event specified by id.
   the user whose attendance is being deleted
 * Request
   * Method: DELETE
-  * URL: /events/:eventId/attendees/:attendeeId
+  * URL: /api/events/:eventId/attendees/:attendeeId
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -1661,7 +1662,7 @@ Create and return a new image for a group specified by id.
 * Require proper authorization: Current User must be the organizer for the group
 * Request
   * Method: POST
-  * URL: /groups/:groupId/images
+  * URL: api/groups/:groupId/images
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1708,7 +1709,7 @@ Create and return a new image for an event specified by id.
 * Require proper authorization: Current User must be an attendee of the event
 * Request
   * Method: POST
-  * URL: api/events/:eventId/images
+  * URL: /api/events/:eventId/images
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1755,7 +1756,7 @@ Delete an existing image.
 * Require proper authorization: Image must belong to the current user
 * Request
   * Method: DELETE
-  * URL: api/images/:imageId
+  * URL: /api/images/:imageId
   * Body: none
 
 * Successful Response

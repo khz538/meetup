@@ -41,14 +41,16 @@ router.post(
   '/join',
   validateSignup,
   async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+    const { email, password, username, firstName, lastName } = req.body;
+    const user = await User.signup({ email, username, password, firstName, lastName });
 
-    await setTokenCookie(res, user);
-
-    return res.json({
-      user
-    });
+    const token = await setTokenCookie(res, user);
+    const userJSON = user.toJSON();
+    delete userJSON.username;
+    delete userJSON.createdAt;
+    delete userJSON.updatedAt;
+    userJSON.token = token;
+    return res.json(userJSON);
   }
 );
 
