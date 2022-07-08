@@ -20,6 +20,24 @@ const checkAuth = (req, res, next) => {
     }
 }
 
+// Get all Events of a Group specified by its id
+router.get('/:groupId/events', async (req, res, next) => {
+    let {groupId} = req.params; groupId = parseInt(groupId);
+    const events = await Event.findAll({
+        include: [
+            {
+                model: Group, where: { id: groupId },
+                attributes: ['id', 'name', 'city', 'state'],
+            },
+            { model: Venue, attributes: ['id', 'city', 'state'] },
+        ],
+        attributes: {
+            exclude: ['description'],
+        }
+    });
+    return res.json({Events: events});
+});
+
 // Create an Event for a Group specified by its id
 router.post('/:groupId/events/new', checkAuth, async (req, res, next) => {
     let {groupId} = req.params; groupId = parseInt(groupId);
@@ -137,7 +155,7 @@ router.get(
             result.push(group.Group);
         });
         return res.json({ Group: result });
-    }    
+    }
 )
 
 // Get details of a Group from an id
@@ -239,7 +257,7 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
             statusCode: 400
         })
     }
-    
+
     // if (status === "co-host" && req.user.id !== group.organizerId) {
     //     return res.status(403).json({
     //         message: 'Current User must be the organizer to add a co-host',
@@ -256,7 +274,7 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
         })
     };
     let targetMember = await GroupMember.findOne({
-        where: { 
+        where: {
             [Op.and]: [
                 { userId: memberId },
                 { groupId: groupId }
@@ -331,7 +349,7 @@ router.post('/:groupId/join', checkAuth, async (req, res) => {
             }
         }
     }
-    
+
     const userId = req.user.id;
     const newMember = await GroupMember.create({
         groupId,
