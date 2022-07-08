@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       Image.belongsTo(models.Event, {
         foreignKey: "eventId",
         // onDelete: "CASCADE",
+        // as: "images"
       });
     }
   }

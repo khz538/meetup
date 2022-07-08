@@ -373,7 +373,7 @@ Creates and returns a new group.
       "city": "New York",
       "state": "NY",
       "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36" 
+      "updatedAt": "2021-11-19 20:39:36"
     }
     ```
 
@@ -439,7 +439,7 @@ Updates and returns an existing group.
       "city": "New York",
       "state": "NY",
       "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40" 
+      "updatedAt": "2021-11-20 10:06:40"
     }
     ```
 
@@ -497,7 +497,7 @@ Deletes an existing group.
     ```json
     {
       "message": "Successfully deleted",
-      "statusCode": 200 
+      "statusCode": 200
     }
     ```
 
@@ -881,7 +881,7 @@ Returns all the events of a group specified by its id
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups/:groupId/events
+  * URL: /api/groups/:groupId/events
   * Body: none
 
 * Successful Response
@@ -955,7 +955,7 @@ Returns the details of an event specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events/:eventId
+  * URL: /api/events/:eventId
   * Body: none
 
 * Successful Response
@@ -1428,8 +1428,8 @@ Returns the attendees of an event specified by its id.
     }
     ```
 
-* Successful Response: If you ARE NOT the organizer of the group or a member of 
-  the group with a status of "co-host". Shows all members that don't have a 
+* Successful Response: If you ARE NOT the organizer of the group or a member of
+  the group with a status of "co-host". Shows all members that don't have a
   status of "pending".
   * Status Code: 200
   * Headers:
@@ -1708,7 +1708,7 @@ Create and return a new image for an event specified by id.
 * Require proper authorization: Current User must be an attendee of the event
 * Request
   * Method: POST
-  * URL: /events/:eventId/image 
+  * URL: /events/:eventId/image
   * Headers:
     * Content-Type: application/json
   * Body:

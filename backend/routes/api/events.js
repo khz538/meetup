@@ -324,6 +324,92 @@ router.delete('/:eventId/attendees/:attendeeId', checkAuth, async (req, res, nex
         }
 });
 
+// Get details of an Event specified by its id
+router.get('/:eventId', async (req, res, next) => {
+    let { eventId } = req.params; eventId = parseInt(eventId);
+    const eventPayload = [
+        "id",
+        'groupId',
+        'venueId',
+        'name',
+        'description',
+        'type',
+        'capacity',
+        'price',
+        'startDate',
+        'endDate',
+        'numAttending',
+    ]
+    const groupPayload = [
+        'id',
+        'name',
+        'private',
+        'city',
+        'state',
+    ]
+    const venuePayload = [
+        'id',
+        'address',
+        'city',
+        'state',
+        'lat',
+        'lng'
+    ]
+    const event = await Event.findByPk(eventId, {
+        attributes: {
+            include: eventPayload
+        },
+        include: [
+            {
+                model: Group,
+                // attributes: {
+                //     include: groupPayload
+                // }
+            },
+            {
+                model: Venue,
+                // attributes: {
+                //     include: venuePayload
+                // }
+            },
+            // {
+            //     model: Image,
+            //     // as: "images"
+            // }
+        ],
+    });
+    const images = await Image.findAll({
+        attributes: ['url'],
+        where: {
+            eventId
+        }
+    });
+    const imageArr = [];
+    images.forEach(image => {
+        imageArr.push(image.dataValues.url);
+    });
+    if (!event) {
+        return res.status(404).json({
+            message: "Event couldn't be found",
+            statusCode: 404,
+        });
+    }
+    const eventJSON = event.toJSON();
+    eventJSON.images = imageArr;
+    delete eventJSON.Images;
+    delete eventJSON.Group.organizerId;
+    delete eventJSON.Group.about;
+    delete eventJSON.Group.type;
+    delete eventJSON.Group.numMembers;
+    delete eventJSON.Group.previewImage;
+    delete eventJSON.Group.createdAt;
+    delete eventJSON.Group.updatedAt;
+    delete eventJSON.Venue.groupId;
+    delete eventJSON.previewImage;
+
+    return res.json(eventJSON);
+});
+
 // Get all events
 router.get('/', async (req, res, next) => {
     const events = await Event.findAll({
