@@ -388,8 +388,8 @@ router.delete('/:groupId/members/:memberId', checkAuth, async (req, res) => {
     memberId = parseInt(memberId);
     const group = await Group.findByPk(groupId);
     const currentUser = req.user;
-    console.log('currentUser.id',currentUser.id);
-    console.log('group organizer id', group.organizerId);
+    // console.log('currentUser.id',currentUser.id);
+    // console.log('group organizer id', group.organizerId);
     const targetMember = await GroupMember.findOne({
         where: { groupId, userId: memberId },
     });
