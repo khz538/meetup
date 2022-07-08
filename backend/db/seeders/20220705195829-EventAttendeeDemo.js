@@ -11,13 +11,28 @@ module.exports = {
       {
         userId: 2,
         eventId: 2,
-        attendingStatus: "pending"
+        attendingStatus: "member"
       },
       {
         userId: 3,
         eventId: 3,
         attendingStatus: "waitlist"
       },
+      {
+        userId: 4,
+        eventId: 3,
+        attendingStatus: "member"
+      },
+      {
+        userId: 2,
+        eventId: 1,
+        attendingStatus: "pending"
+      },
+      {
+        userId: 3,
+        eventId: 1,
+        attendingStatus: "waitlist"
+      }
     ], {});
   },
 

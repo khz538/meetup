@@ -11,7 +11,7 @@ module.exports = {
       {
         userId: 2,
         groupId: 2,
-        membershipStatus: "pending"
+        membershipStatus: "co-host"
       },
       {
         userId: 3,
@@ -28,6 +28,11 @@ module.exports = {
         groupId: 3,
         membershipStatus: "member"
       },
+      {
+        userId: 2,
+        groupId: 4,
+        membership: "pending"
+      }
     ], {});
   },
 
