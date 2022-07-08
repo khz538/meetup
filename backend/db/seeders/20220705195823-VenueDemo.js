@@ -86,7 +86,7 @@ module.exports = {
       city: 'New York City',
       state: 'NY',
       lat: 10.1,
-      longitude: 20.4
+      lng: 20.4
     },
     ], {});
   },
