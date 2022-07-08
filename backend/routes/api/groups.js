@@ -45,6 +45,37 @@ router.get('/:groupId/events', async (req, res, next) => {
     return res.json({Events: events});
 });
 
+// Add an Image to a Group based on the Group's id
+router.post('/:groupId/images', checkAuth, async (req, res, next) => {
+    let { groupId } = req.params; groupId = parseInt(groupId);
+    const currentUser = req.user;
+    const { url } = req.body;
+    const imageableType = "Group"
+    const group = await Group.findByPk(groupId);
+    if (!group) {
+        return res.status(404).json({
+            message: "Group couldn't be found",
+            statusCode: 404
+        });
+    }
+    if (group.organizerId === currentUser.id) {
+        const newImage = await Image.create({
+            groupId,
+            imageableType,
+            url,
+            userId: currentUser.id,
+        });
+        const newImageJSON = newImage.toJSON();
+        delete newImageJSON.eventId;
+        delete newImageJSON.createdAt;
+        delete newImageJSON.updatedAt;
+        delete newImageJSON.userId;
+        return res.json(newImageJSON);
+    } else {
+        throw new Error('Current User must be the organizer for the group');
+    }
+});
+
 // Create an Event for a Group specified by its id
 router.post('/:groupId/events/new', checkAuth, async (req, res, next) => {
     let {groupId} = req.params; groupId = parseInt(groupId);

@@ -234,6 +234,40 @@ router.post('/:eventId/join', checkAuth, async (req, res, next) => {
     });
 });
 
+// Add an Image to an Event based on the Event's id
+router.post('/:eventId/images', checkAuth, async (req, res, next) => {
+    let { eventId } = req.params; eventId = parseInt(eventId);
+    const currentUser = req.user; const userId = req.user.id;
+    const { url } = req.body;
+    const imageableType = "Event"
+    const event = await Event.findByPk(eventId);
+    if (!event) {
+        return res.status(404).json({
+            message: "Event couldn't be found",
+            statusCode: 404
+        });
+    }
+    const attendee = await EventAttendee.findOne({
+        where: { eventId, userId },
+    });
+    if (!attendee) {
+        throw new Error('Current User must be an attendee of the event');
+    } else if (attendee.attendingStatus === "member") {
+        const newImage = await Image.create({
+            eventId,
+            imageableType,
+            url,
+            userId
+        });
+        const newImageJSON = newImage.toJSON();
+        delete newImageJSON.groupId;
+        delete newImageJSON.createdAt;
+        delete newImageJSON.updatedAt;
+        delete newImageJSON.userId;
+        return res.json(newImageJSON);
+    }
+});
+
 // Change the status of an attendance for an event specified by id
 router.put('/:eventId/attendees', checkAuth, async (req, res, next) => {
     let { eventId } = req.params; eventId = parseInt(eventId);

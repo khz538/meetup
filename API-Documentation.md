@@ -1661,7 +1661,7 @@ Create and return a new image for a group specified by id.
 * Require proper authorization: Current User must be the organizer for the group
 * Request
   * Method: POST
-  * URL: /groups/:groupId/image
+  * URL: /groups/:groupId/images
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1681,7 +1681,7 @@ Create and return a new image for a group specified by id.
     ```json
     {
       "id": 1,
-      "imageableId": 1,
+      "groupId": 1,
       "imageableType": "Group",
       "url": "image url",
     }
@@ -1708,7 +1708,7 @@ Create and return a new image for an event specified by id.
 * Require proper authorization: Current User must be an attendee of the event
 * Request
   * Method: POST
-  * URL: /events/:eventId/image
+  * URL: api/events/:eventId/images
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1728,7 +1728,7 @@ Create and return a new image for an event specified by id.
     ```json
     {
       "id": 1,
-      "imageableId": 1,
+      "eventId": 1,
       "imageableType": "Event",
       "url": "image url",
     }
@@ -1752,11 +1752,10 @@ Create and return a new image for an event specified by id.
 Delete an existing image.
 
 * Require Authentication: true
-* Require proper authorization: Image must belong to the current user through
-  the image's imageableId and imageableType
+* Require proper authorization: Image must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /images/:imageId
+  * URL: api/images/:imageId
   * Body: none
 
 * Successful Response

@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         eitherOr (value) {
-          if (this.groupId) throw new Error('Can only have either eventId or groupId');
+          if (this.groupId && value) throw new Error('Can only have either eventId or groupId');
         }
       }
     },
@@ -42,14 +42,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         eitherOr (value) {
-          if (this.eventId) throw new Error('Can only have either eventId or groupId');
+          if (this.eventId && value) throw new Error('Can only have either eventId or groupId');
         }
       }
     },
     imageableType: {
       type: DataTypes.STRING,
       validate: {
-        isIn: ['Event', 'Group'],
+        isIn: [['Group', 'Event']],
       }
     },
     url: { type: DataTypes.STRING, allowNull: false }
