@@ -17,5 +17,5 @@ npx sequelize model:generate --name Venue --attributes address:string,city:strin
 npx sequelize model:generate --name EventAttendee --attributes userId:integer,eventId:integer,attendingStatus:string
 
 # Generate Image model & migration
-npx sequelize model:generate --name Image --attributes eventId:integer,groupId:integer,url:string
+npx sequelize model:generate --name Image --attributes userId:integer,groupId:integer,eventId:integer,url:string
 

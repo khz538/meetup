@@ -20,11 +20,32 @@ module.exports = (sequelize, DataTypes) => {
         // onDelete: "CASCADE",
         // as: "images"
       });
+      Image.belongsTo(models.User, {
+        foreignKey: "userId",
+      });
     }
   }
   Image.init({
-    eventId: DataTypes.INTEGER,
-    groupId: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    eventId: {
+      type: DataTypes.INTEGER,
+      validate: {
+        eitherOr (value) {
+          if (this.groupId) throw new Error('Can only have either eventId or groupId');
+        }
+      }
+    },
+    groupId: {
+      type: DataTypes.INTEGER,
+      validate: {
+        eitherOr (value) {
+          if (this.eventId) throw new Error('Can only have either eventId or groupId');
+        }
+      }
+    },
     url: { type: DataTypes.STRING, allowNull: false }
   }, {
     sequelize,

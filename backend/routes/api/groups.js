@@ -112,7 +112,7 @@ router.get('/:groupId/members', async (req, res) => {
         const groupMembers = await User.findAll({
             attributes: ["id", "firstName", "lastName"],
             include: [{
-                model: GroupMember,
+                model: GroupMember, as: "Membership",
                 // model: Group,
                 where: {
                     groupId
