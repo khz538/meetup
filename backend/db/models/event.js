@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     /**
@@ -11,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Event.belongsToMany(models.User, { through: models.EventAttendee, onDelete: "CASCADE" });
+      // Event.belongsToMany(models.User, { through: models.EventAttendee, onDelete: "CASCADE" });
       Event.hasMany(models.Image, { foreignKey: "eventId", onDelete: "CASCADE" });
       Event.belongsTo(models.Venue, { foreignKey: "venueId" });
       Event.belongsTo(models.Group, {
         foreignKey: "groupId",
       });
-      Event.hasMany(models.EventAttendee, { foreignKey: "eventId", onDelete: "CASCADE" });
+      Event.hasMany(models.EventAttendee, { foreignKey: "eventId", onDelete: "CASCADE", as: "Attendance" });
     }
   }
   Event.init({
@@ -40,10 +41,16 @@ module.exports = (sequelize, DataTypes) => {
     type: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isIn: ['Online', 'In person'],
+      }
     },
     capacity: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        isInt: true,
+      }
     },
     price: {
       type: DataTypes.FLOAT,
@@ -54,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isDate: true,
+        isAfter: sequelize.fn('NOW')
       }
     },
     endDate: {
@@ -61,12 +69,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isDate: true,
-        isAfter: this.startDate,
+        endDateAfterStartDate(value) {
+          if (value < this.startDate) {
+            throw new Error('Must be after start date');
+          }
+        }
+        // isAfter: this.startDate,
       }
     },
     numAttending: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      // allowNull: false,
     },
     previewImage: {
       type: DataTypes.STRING,

@@ -20,16 +20,63 @@ const checkAuth = (req, res, next) => {
     }
 }
 
-// const findGroup = (req, res, next) => {
-//     try {
-//         const groupId = req.params.groupId;
-//         const group = await Group.findByPk(groupId);
-//         next()
-//     } catch (err) {
-//         res.status(404);
-        
-//     }
-// }
+// Create an Event for a Group specified by its id
+router.post('/:groupId/events/new', checkAuth, async (req, res, next) => {
+    let {groupId} = req.params; groupId = parseInt(groupId);
+    const userId = req.user.id;
+    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+    const group = await Group.findByPk(groupId);
+    if (!group) {
+        res.status(404).json({
+            message: "Group couldn't be found",
+            statusCode: 404
+        });
+    }
+    const currentUserStatus = await GroupMember.findOne({
+        where: {groupId, userId}
+    });
+
+    if (!currentUserStatus) {
+        throw new Error ('You are not a member of this group');
+    }
+    if (group.organizerId == userId ||
+        currentUserStatus.membershipStatus == "co-host") {
+            try {
+                let newEvent = await Event.create({
+                    venueId,
+                    groupId,
+                    name,
+                    type,
+                    capacity,
+                    price,
+                    description,
+                    startDate,
+                    endDate,
+                });
+                const newEventJSON = newEvent.toJSON();
+                delete newEventJSON.updatedAt;
+                delete newEventJSON.createdAt;
+                return res.json(newEventJSON);
+            } catch (err) {
+                return res.status(400).json({
+                    message: "Validation error",
+                    statusCode: 400,
+                    errors: {
+                        venueId: "Venue does not exist",
+                        name: "Name must be at least five characters",
+                        type: "Type must be Online or In person",
+                        capacity: "Capacity must be an integer",
+                        price: "Price is invalid",
+                        description: "Description is required",
+                        startDate: "Start date must be in the future",
+                        endDate: "End date is less than start date"
+                    }
+                });
+            }
+        } else {
+            throw new Error('Unauthorized');
+        }
+});
 
 // Get all Members of a Group specified by its id
 router.get('/:groupId/members', async (req, res) => {
