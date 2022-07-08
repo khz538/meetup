@@ -1170,7 +1170,7 @@ Creates and returns a new event for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /groups/:groupId/events
+  * URL: /groups/:groupId/events/new
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1221,7 +1221,7 @@ Creates and returns a new event for a group specified by its id
       "statusCode": 400,
       "errors": {
         "venueId": "Venue does not exist",
-        "name": "Name must be at least 5 characters",
+        "name": "Name must be at least five characters",
         "type": "Type must be Online or In person",
         "capacity": "Capacity must be an integer",
         "price": "Price is invalid",
