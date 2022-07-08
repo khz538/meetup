@@ -23,6 +23,13 @@ const checkAuth = (req, res, next) => {
 // Get all Events of a Group specified by its id
 router.get('/:groupId/events', async (req, res, next) => {
     let {groupId} = req.params; groupId = parseInt(groupId);
+    const group = await Group.findByPk(groupId);
+    if (!group) {
+        return res.status(404).json({
+            message: "Group couldn't be found",
+            statusCode: 404,
+        });
+    }
     const events = await Event.findAll({
         include: [
             {
