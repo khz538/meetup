@@ -1289,8 +1289,8 @@ Edit and returns an event specified by its id
       "capacity": 10,
       "price": 18.50,
       "description": "The first meet and greet for our group! Come say hello!",
-      "startDate": "2021-11-19 20:00:00",
-      "endDate": "2021-11-19 21:00:00",
+      "startDate": "2030-11-19 20:00:00",
+      "endDate": "2035-11-19 21:00:00",
     }
     ```
 

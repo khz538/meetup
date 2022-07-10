@@ -135,10 +135,16 @@ router.get('/:eventId/attendees', async (req, res, next) => {
     const event = await Event.findByPk(eventId);
     console.log(event);
     const groupId = event.groupId;
+    if (!group) {
+        return res.status(404).json({
+            message: "Event couldn't be found",
+            statusCode: 404,
+        });
+    }
     const group = await Group.findByPk(groupId);
     const userId = req.user.id;
     if (!event) {
-        res.status(404).json({
+        return res.status(404).json({
             message: "Event couldn't be found",
             statusCode: 404,
         });
