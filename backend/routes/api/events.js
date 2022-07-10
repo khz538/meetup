@@ -271,6 +271,10 @@ router.post('/:eventId/images', checkAuth, async (req, res, next) => {
         delete newImageJSON.updatedAt;
         delete newImageJSON.userId;
         return res.json(newImageJSON);
+    } else {
+        return res.json({
+            message: "You are not yet an attending member of this event"
+        });
     }
 });
 
