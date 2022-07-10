@@ -99,40 +99,26 @@ router.put('/:venueId', checkAuth, async (req, res) => {
     if (group.organizerId == userId ||
         currentUserStatus.membershipStatus == "co-host") {
             try {
-                if (address && address !== "") venue.address = address;
-                else {
-                    return res.status(400).json({
-                        message: "Address cannot be an empty string",
-                        statusCode: 400,
-                    });
+                if (address) venue.address = address;
+                if (city) venue.city = city;
+                if (state) venue.state = state;
+                if (lat) {
+                    if (lat >= -90 && lat <= 90) venue.lat = lat;
+                    else {
+                        return res.status(400).json({
+                            message: "Latitude is not valid",
+                            statusCode: 400
+                        });
+                    }
                 }
-                if (city && city !=="") venue.city = city;
-                else {
-                    return res.status(400).json({
-                        message: "City cannot be an empty string",
-                        statusCode: 400,
-                    });
-                }
-                if (state && state !=="") venue.state = state;
-                else {
-                    return res.status(400).json({
-                        message: "State cannot be an empty string",
-                        statusCode: 400,
-                    });
-                }
-                if (lat && lat >= -90 && lat <= 90) venue.lat = lat;
-                else {
-                    return res.status(400).json({
-                        message: "Latitude is not valid",
-                        statusCode: 400
-                    });
-                }
-                if (lng && lng >= -180 && lng <= 180) venue.lng = lng;
-                else {
-                    return res.status(400).json({
-                        message: "Longitude is not valid",
-                        statusCode: 400
-                    });
+                if (lng) {
+                    if (lng >= -180 && lng <= 180) venue.lng = lng;
+                    else {
+                        return res.status(400).json({
+                            message: "Longitude is not valid",
+                            statusCode: 400
+                        });
+                    }
                 }
                 venueJSON = venue.toJSON();
                 delete venueJSON.updatedAt;
