@@ -379,7 +379,7 @@ router.post('/:groupId/join', checkAuth, async (req, res) => {
                     message: "Membership has already been requested",
                     statusCode: 400
                 });
-            } else if (el[1] === 'member') {
+            } else if (el[1] === 'member' || el[1] === 'co-host') {
                 return res.status(400).json({
                     message: "User is already a member of the group",
                     statusCode: 400
