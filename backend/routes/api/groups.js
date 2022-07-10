@@ -350,8 +350,8 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
 });
 
 // Request a Membership for a Group based on the Group's id
-router.post('/join', checkAuth, async (req, res) => {
-    let { groupId } = req.body;
+router.post('/:groupId/join', checkAuth, async (req, res) => {
+    let { groupId } = req.params;
     groupId = parseInt(groupId);
     const group = await Group.findByPk(groupId);
     // error if group doesn't exist
@@ -395,7 +395,7 @@ router.post('/join', checkAuth, async (req, res) => {
         membershipStatus: "pending"
     });
     return res.json({
-        groupId: groupId,
+        groupId,
         memberId: userId,
         status: "pending"
     });
