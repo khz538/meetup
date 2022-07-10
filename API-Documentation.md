@@ -1405,7 +1405,7 @@ Returns the attendees of an event specified by its id.
           "id": 2,
           "firstName": "Clark",
           "lastName": "Adams",
-          "eventAttendee": {
+          "EventAttendees": {
             "attendingStatus": "member"
           },
         },
@@ -1413,7 +1413,7 @@ Returns the attendees of an event specified by its id.
           "id": 3,
           "firstName": "John",
           "lastName": "Smith",
-          "eventAttendee": {
+          "EventAttendees": {
             "attendingStatus": "waitlist"
           },
         },
@@ -1421,7 +1421,7 @@ Returns the attendees of an event specified by its id.
           "id": 4,
           "firstName": "Jane",
           "lastName": "Doe",
-          "eventAttendee": {
+          "EventAttendees": {
             "attendingStatus": "pending"
           },
         },
@@ -1444,7 +1444,7 @@ Returns the attendees of an event specified by its id.
           "id": 2,
           "firstName": "Clark",
           "lastName": "Adams",
-          "EventAttendee": {
+          "EventAttendees": {
             "attendingStatus": "member"
           },
         },
@@ -1452,7 +1452,7 @@ Returns the attendees of an event specified by its id.
           "id": 3,
           "firstName": "John",
           "lastName": "Smith",
-          "EventAttendee": {
+          "EventAttendees": {
             "attendingStatus": "waitlist"
           },
         },
