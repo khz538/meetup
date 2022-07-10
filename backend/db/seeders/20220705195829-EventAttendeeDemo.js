@@ -29,10 +29,41 @@ module.exports = {
         attendingStatus: "pending"
       },
       {
-        userId: 3,
-        eventId: 1,
-        attendingStatus: "waitlist"
-      }
+        userId: 2,
+        eventId: 3,
+        attendingStatus: "pending"
+      },
+      {
+        userId: 2,
+        eventId: 4,
+        attendingStatus: "pending"
+      },
+      {
+        userId: 2,
+        eventId: 5,
+        attendingStatus: "pending"
+      },
+      {
+        userId: 1,
+        eventId: 5,
+        attendingStatus: "pending"
+      },
+      {
+        userId: 1,
+        eventId: 4,
+        attendingStatus: "pending"
+      },
+      {
+        userId: 1,
+        eventId: 3,
+        attendingStatus: "pending"
+      },
+            {
+        userId: 1,
+        eventId: 2,
+        attendingStatus: "pending"
+      },
+
     ], {});
   },
 
