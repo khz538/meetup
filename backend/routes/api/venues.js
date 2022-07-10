@@ -136,6 +136,8 @@ router.put('/:venueId', checkAuth, async (req, res) => {
                     }
                 });
             }
+    } else {
+        throw new Error('You are not the organizer or co-host of this group')
     }
 });
 
