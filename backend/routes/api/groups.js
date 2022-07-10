@@ -425,7 +425,7 @@ router.post('/', checkAuth, async (req, res) => {
             membershipStatus: "member",
         });
         // console.log(newGroup)
-        return res.json(newGroup);
+        return res.json(newGroup, newGroupMember);
     } catch (e) {
         return res.status(400).json({
             message: 'Validation Error',
