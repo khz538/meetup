@@ -350,8 +350,8 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
 });
 
 // Request a Membership for a Group based on the Group's id
-router.post('/:groupId/join', checkAuth, async (req, res) => {
-    let { groupId } = req.params;
+router.post('/:groupId', checkAuth, async (req, res) => {
+    let { groupId } = req.body;
     groupId = parseInt(groupId);
     const group = await Group.findByPk(groupId);
     // error if group doesn't exist
