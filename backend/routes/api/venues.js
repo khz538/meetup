@@ -135,6 +135,7 @@ router.put('/:venueId', checkAuth, async (req, res) => {
                         });
                     }
                 }
+                await venue.save();
                 venueJSON = venue.toJSON();
                 delete venueJSON.updatedAt;
                 return res.json(venueJSON);
