@@ -419,7 +419,12 @@ router.post('/', checkAuth, async (req, res) => {
             state,
             numMembers,
         });
-        console.log(newGroup)
+        const newGroupMember = await GroupMember.create({
+            userId: organizerId,
+            groupId: newGroup.id,
+            membershipStatus: "member",
+        });
+        // console.log(newGroup)
         return res.json(newGroup);
     } catch (e) {
         return res.status(400).json({
