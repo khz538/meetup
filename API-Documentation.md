@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![](backend/schema/drawSQL-export-2022-07-01_18_11.png)
+![](backend/schema/drawSQL-export-2022-07-10_16_32.png)
 
 ## API Documentation
 
