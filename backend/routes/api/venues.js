@@ -27,6 +27,21 @@ router.post('/new/groups/:groupId', checkAuth, async (req, res, next) => {
     groupId = parseInt(groupId);
     const userId = req.user.id;
     const { address, city, state, lat, lng } = req.body;
+    if (!address) {
+        return res.json({
+            message: "Street address is required"
+        });
+    }
+    if (!city) {
+        return res.json({
+            message: "City is required"
+        });
+    }
+    if (!state) {
+        return res.json({
+            message: "State is required"
+        });
+    }
     // Find group
     const group = await Group.findByPk(groupId);
     if (!group) {
