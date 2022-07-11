@@ -66,6 +66,7 @@ router.post('/new/groups/:groupId', checkAuth, async (req, res, next) => {
                     state,
                     lat,
                     lng,
+                    groupId,
                 });
                 const newVenueJSON = newVenue.toJSON();
                 delete newVenueJSON.updatedAt;
