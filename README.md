@@ -1,4 +1,4 @@
-# `Welcome to my Meetup Clone!`
+# `Welcome to MeetUs, a Meetup Clone!`
 
 This clone aims to mimic both the look and functionality of meetup.com.
 
