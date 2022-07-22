@@ -424,7 +424,7 @@ router.post('/', checkAuth, async (req, res) => {
             groupId: newGroup.id,
             membershipStatus: "member",
         });
-        console.log(newGroupMember);
+        // console.log(newGroupMember);
         // console.log(newGroup)
         return res.json(newGroup);
     } catch (e) {
