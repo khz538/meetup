@@ -73,7 +73,7 @@ router.put('/:eventId', checkAuth, async(req, res, next) => {
                 delete eventJSON.updatedAt;
                 delete eventJSON.previewImage;
                 delete eventJSON.numAttending;
-                console.log('------', event.price);
+                // console.log('------', event.price);
                 return res.json(eventJSON);
             } catch (e) {
                 return res.send({
@@ -133,7 +133,7 @@ router.delete('/:eventId', checkAuth, async (req, res, next) => {
 router.get('/:eventId/attendees', async (req, res, next) => {
     let { eventId } = req.params; eventId = parseInt(eventId);
     const event = await Event.findByPk(eventId);
-    console.log(event);
+    // console.log(event);
     const groupId = event.groupId;
     const group = await Group.findByPk(groupId);
     if (!group) {
@@ -165,7 +165,7 @@ router.get('/:eventId/attendees', async (req, res, next) => {
                     attributes: ["attendingStatus"],
                 }],
             });
-            console.log(eventAttendees);
+            // console.log(eventAttendees);
             return res.json({Attendees: eventAttendees});
         } else {
             const eventAttendees = await User.findAll({
@@ -213,7 +213,7 @@ router.post('/:eventId/join', checkAuth, async (req, res, next) => {
         arr.push([user.dataValues.userId, user.dataValues.attendingStatus]);
     });
     for (let el of arr) {
-        console.log(el[0], el[1]);
+        // console.log(el[0], el[1]);
         if (el[0] === req.user.id) {
             if (el[1] === 'pending') {
                 return res.status(400).json({

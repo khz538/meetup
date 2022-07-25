@@ -154,7 +154,7 @@ router.get('/:groupId/members', async (req, res) => {
                 //     model: GroupMember, as: 'Membership'}
             ],
         });
-        console.log(groupMembers);
+        // console.log(groupMembers);
         return res.json({Members: groupMembers});
     } else {
         const groupMembers = await User.findAll({
@@ -242,7 +242,7 @@ router.put('/:groupId', checkAuth, async (req, res) => {
     }
     const user = await User.findByPk(req.user.id);
     if (group.organizerId !== user.id) {
-        console.log(req.user.id);
+        // console.log(req.user.id);
         throw new Error('Not authorized');
     }
     try {
@@ -275,7 +275,7 @@ router.put('/:groupId/members', checkAuth, async (req, res) => {
     const { groupId } = req.params;
     const { memberId, status } = req.body;
     const group = await Group.findByPk(groupId);
-    console.log(group)
+    // console.log(group)
     if (!group) {
         res.status(404).json({
             message: "Group couldn't be found",
@@ -372,7 +372,7 @@ router.post('/:groupId/join', checkAuth, async (req, res) => {
         arr.push([user.dataValues.userId, user.dataValues.membershipStatus]);
     });
     for (let el of arr) {
-        console.log(el[0], el[1]);
+        // console.log(el[0], el[1]);
         if (el[0] === req.user.id) {
             if (el[1] === 'pending') {
                 return res.status(400).json({
@@ -455,7 +455,7 @@ router.delete('/:groupId/members/:memberId', checkAuth, async (req, res) => {
     const targetMember = await GroupMember.findOne({
         where: { groupId, userId: memberId },
     });
-    console.log('targetMember.userId', targetMember.userId);
+    // console.log('targetMember.userId', targetMember.userId);
     if (!group) {
         return res.status(404).json({
             message: "Group couldn't be found",
@@ -483,7 +483,7 @@ router.delete('/:groupId', checkAuth, async (req, res) => {
     }
     const user = await User.findByPk(req.user.id);
     if (group.organizerId !== user.id) {
-        console.log(req.user.id);
+        // console.log(req.user.id);
         throw new Error('Not authorized');
     }
     await group.destroy();
