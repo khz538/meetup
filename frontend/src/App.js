@@ -5,6 +5,8 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
+import Groups from "./components/Groups";
+import GroupDetail from "./components/GroupDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,8 +23,14 @@ function App() {
           {/* <Route path="/signup">
             <SignupFormPage />
           </Route> */}
-          <Route path='/'>
+          <Route exact path='/'>
             <HomePage />
+          </Route>
+          <Route exact path='/groups'>
+            <Groups />
+          </Route>
+          <Route path='/groups/:groupId'>
+            <GroupDetail />
           </Route>
         </Switch>
       )}
