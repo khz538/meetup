@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import Groups from "./components/Groups";
 import GroupDetail from "./components/GroupDetail";
+import Events from "./components/Events";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path='/groups/:groupId'>
             <GroupDetail />
+          </Route>
+          <Route path='/events/'>
+            <Events />
           </Route>
         </Switch>
       )}

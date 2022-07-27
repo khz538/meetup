@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 
 const GET_ALL_GROUPS = 'groups/GET_ALL_GROUPS';
 const GET_ONE_GROUP = 'groups/GET_ONE_GROUP';
+const GET_GROUP_MEMBERS = 'groups/GET_GROUP_MEMBERS';
 
 // Get all groups action creator
 const getAllGroups = groups => {
@@ -20,6 +21,15 @@ const getOneGroup = group => {
     };
 };
 
+// // Get members of a group
+// const getMembers = (members, groupId) => {
+//     return {
+//         type: GET_GROUP_MEMBERS,
+//         members,
+//         groupId,
+//     }
+// }
+
 // Get all groups thunk action creator
 export const getGroups = () => async dispatch => {
     const response = await csrfFetch('/api/groups');
@@ -33,11 +43,22 @@ export const getGroups = () => async dispatch => {
 // Get single group thunk action creator
 export const getGroupById = id => async dispatch => {
     const response = await fetch(`/api/groups/${id}`);
+    console.log('........', response)
     if (response.ok) {
         const group = await response.json();
+        // console.log(group)
         dispatch(getOneGroup(group));
     };
 };
+
+// // Get members of a group thunk action creator
+// export const getGroupMembers = (id) => async dispatch => {
+//     const response = await fetch(`/api/groups/${id}/members`);
+//     if (response.ok) {
+//         const members = await response.json();
+//         dispatch(getMembers(members));
+//     }
+// }
 
 const initialState = {};
 const groupsReducer = (state = initialState, action) => {

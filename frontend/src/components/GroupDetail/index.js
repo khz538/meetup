@@ -11,6 +11,10 @@ export default function GroupDetail() {
     // console.log('++++++++', group);
 
     // const isOrganizer = user?.id === group?.organizerId;
+    // async function getDetail(groupId) {
+    //     const getGroup = await dispatch(getGroupById(groupId));
+    //     const getMembers = await dispatch(getGroupMembers(groupId));
+    // }
 
     useEffect(() => {
         dispatch(getGroupById(groupId));
@@ -25,14 +29,21 @@ export default function GroupDetail() {
                 <div>
                     <h1>{group.name}</h1>
                     <p>{group.numMembers} member(s)</p>
-                    <p>Organizer: {group.Organizer.firstName}</p>
+                    <p>Owner: {group.Organizer.firstName}</p>
                     <p>{group.city}, {group.state}</p>
+                    <button>Join This Group</button>
                 </div>
             </div>
             <div className='group-detail-lower'>
                 <div className='group-about-section'>
                     <h3>What we're about</h3>
                     <p>{group.about}</p>
+                </div>
+                <div className='members'>
+                    <h3>Organizer</h3>
+                    <p>{group.Organizer.firstName} {group.Organizer.lastName}</p>
+                    <h3>Members</h3>
+                    {group.Members.map(member => <p>{member.firstName} {member.lastName}</p>)}
                 </div>
             </div>
         </div>

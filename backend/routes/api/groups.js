@@ -139,23 +139,40 @@ router.get('/:groupId/members', async (req, res) => {
     const { groupId } = req.params;
     const group = await Group.findByPk(groupId);
     if (!group) res.status(404).json({message: 'Group couldn\'t be found', statusCode: 404});
-    if (group.organizerId === req.user.id) {
-        const groupMembers = await User.findAll({
-            attributes: ["id", "firstName", "lastName"],
-            include: [{
-                model: GroupMember, as: "Membership",
-                // model: Group,
-                where: {
-                    groupId
-                },
-                attributes: ["membershipStatus"],
-                },
-                // {
-                //     model: GroupMember, as: 'Membership'}
-            ],
-        });
-        // console.log(groupMembers);
-        return res.json({Members: groupMembers});
+    if (req.user) {
+        if (group.organizerId === req.user.id) {
+            const groupMembers = await User.findAll({
+                attributes: ["id", "firstName", "lastName"],
+                include: [{
+                    model: GroupMember, as: "Membership",
+                    // model: Group,
+                    where: {
+                        groupId
+                    },
+                    attributes: ["membershipStatus"],
+                    },
+                    // {
+                    //     model: GroupMember, as: 'Membership'}
+                ],
+            });
+            // console.log(groupMembers);
+            return res.json({Members: groupMembers});
+        } else {
+            const groupMembers = await User.findAll({
+                attributes: ["id", "firstName", "lastName"],
+                include: [{
+                    model: GroupMember, as: "Membership",
+                    where: {
+                        groupId,
+                        membershipStatus: {
+                            [Op.notIn]: ["pending"],
+                        }
+                    },
+                    attributes: ["membershipStatus"],
+                }]
+            });
+        }
+        return res.json({Members: groupMembers})
     } else {
         const groupMembers = await User.findAll({
             attributes: ["id", "firstName", "lastName"],
@@ -218,12 +235,140 @@ router.get(
         images.forEach(image => {
             imageArr.push(image.dataValues.url);
         });
-        let groupJson = group.toJSON();
-        groupJson.Images = imageArr;
-        groupJson.Organizer = organizer.toJSON();
-        delete groupJson.Organizer.username;
-        delete groupJson.previewImage;
-        return res.json(groupJson);
+        const events = await Event.findAll({
+            where: { groupId }
+        });
+        if (req.user) {
+            if (group.organizerId === req.user.id) {
+                const group = await Group.findByPk(groupId, {
+                    // include: [{model: Image, as: "Images"}],
+                });
+                if (!group) {
+                    res.status(404).json({message: "Group couldn't be found", statusCode: 404});
+                }
+                const organizer = await User.findByPk(group.organizerId);
+                const images = await Image.findAll({
+                    attributes: ['url'],
+                    where: {
+                        groupId
+                    }
+                });
+                const imageArr = [];
+                images.forEach(image => {
+                    imageArr.push(image.dataValues.url);
+                });
+                const events = await Event.findAll({
+                    where: { groupId }
+                });
+                const groupMembers = await User.findAll({
+                    attributes: ["id", "firstName", "lastName"],
+                    include: [{
+                        model: GroupMember, as: "Membership",
+                        // model: Group,
+                        where: {
+                            groupId
+                        },
+                        attributes: ["membershipStatus"],
+                        },
+                        // {
+                        //     model: GroupMember, as: 'Membership'}
+                    ],
+                });
+                // console.log(groupMembers);
+                let groupJson = group.toJSON();
+                groupJson.Images = imageArr;
+                groupJson.Organizer = organizer.toJSON();
+                groupJson.Events = events;
+                groupJson.Members = groupMembers;
+                delete groupJson.Organizer.username;
+                delete groupJson.previewImage;
+                return res.json(groupJson);
+            } else {
+                const group = await Group.findByPk(groupId, {
+                    // include: [{model: Image, as: "Images"}],
+                });
+                if (!group) {
+                    res.status(404).json({message: "Group couldn't be found", statusCode: 404});
+                }
+                const organizer = await User.findByPk(group.organizerId);
+                const images = await Image.findAll({
+                    attributes: ['url'],
+                    where: {
+                        groupId
+                    }
+                });
+                const imageArr = [];
+                images.forEach(image => {
+                    imageArr.push(image.dataValues.url);
+                });
+                const events = await Event.findAll({
+                    where: { groupId }
+                });
+                const groupMembers = await User.findAll({
+                    attributes: ["id", "firstName", "lastName"],
+                    include: [{
+                        model: GroupMember, as: "Membership",
+                        where: {
+                            groupId,
+                            membershipStatus: {
+                                [Op.notIn]: ["pending"],
+                            }
+                        },
+                        attributes: ["membershipStatus"],
+                    }]
+                });
+                let groupJson = group.toJSON();
+                groupJson.Images = imageArr;
+                groupJson.Organizer = organizer.toJSON();
+                groupJson.Events = events;
+                groupJson.Members = groupMembers;
+                delete groupJson.Organizer.username;
+                delete groupJson.previewImage;
+                return res.json(groupJson);
+            }
+        } else {
+            const group = await Group.findByPk(groupId, {
+            // include: [{model: Image, as: "Images"}],
+            });
+            if (!group) {
+                res.status(404).json({message: "Group couldn't be found", statusCode: 404});
+            }
+            const organizer = await User.findByPk(group.organizerId);
+            const images = await Image.findAll({
+                attributes: ['url'],
+                where: {
+                    groupId
+                }
+            });
+            const imageArr = [];
+            images.forEach(image => {
+                imageArr.push(image.dataValues.url);
+            });
+            const events = await Event.findAll({
+                where: { groupId }
+            });
+            const groupMembers = await User.findAll({
+                attributes: ["id", "firstName", "lastName"],
+                include: [{
+                    model: GroupMember, as: "Membership",
+                    where: {
+                        groupId,
+                        membershipStatus: {
+                            [Op.notIn]: ["pending"],
+                        }
+                    },
+                    attributes: ["membershipStatus"],
+                }]
+            });
+            let groupJson = group.toJSON();
+            groupJson.Images = imageArr;
+            groupJson.Organizer = organizer.toJSON();
+            groupJson.Events = events;
+            groupJson.Members = groupMembers;
+            delete groupJson.Organizer.username;
+            delete groupJson.previewImage;
+            return res.json(groupJson);
+        }
     }
 );
 
