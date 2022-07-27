@@ -59,7 +59,7 @@ export default function CreateGroupPage() {
                             value={city}
                             onChange={e => setCity(e.target.value)}
                         />
-                        <label>State</label>
+                        <label>State/Province</label>
                         <input
                             className='input-field'
                             type='text'
@@ -67,14 +67,20 @@ export default function CreateGroupPage() {
                             onChange={e => setState(e.target.value)}
                         />
                         <label>Type</label>
-                        <select>
+                        <select
+                            onChange={e => setType(e.target.value)}
+                            value={type}
+                        >
                             <option value="option 1">In person</option>
                             <option value="option 2">Online</option>
                         </select>
                         <label>Group Visibility</label>
-                        <select>
-                            <option value='private'>Private</option>
-                            <option value='public'>Public</option>
+                        <select
+                            onChange={e => setPrivacy(e.target.value)}
+                            value={privacy}
+                        >
+                            <option value='private'>true</option>
+                            <option value='public'>false</option>
                         </select>
                     </div>
                     <button className='submit' type='submit'>

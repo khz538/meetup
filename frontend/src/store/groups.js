@@ -48,7 +48,7 @@ export const createGroup = payload => async dispatch => {
     const response = await csrfFetch(`/api/groups`, {
         method: 'POST',
         body: JSON.stringify(payload),
-        headers: { 'content-type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
