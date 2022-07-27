@@ -3,7 +3,7 @@ import { csrfFetch } from './csrf';
 
 const GET_ALL_GROUPS = 'groups/GET_ALL_GROUPS';
 const GET_ONE_GROUP = 'groups/GET_ONE_GROUP';
-// const CREATE_GROUP = 'groups/CREATE_GROUP';
+const CREATE_GROUP = 'groups/CREATE_GROUP';
 
 
 // Get all groups action creator
@@ -21,6 +21,14 @@ const getOneGroup = group => {
         group,
     };
 };
+
+// Create group action creator
+const createGroup = group => {
+    return {
+        type: CREATE_GROUP,
+        group,
+    }
+}
 
 // Get all groups thunk action creator
 export const getGroups = () => async dispatch => {
@@ -44,7 +52,7 @@ export const getGroupById = id => async dispatch => {
 };
 
 // Create a group thunk action creator
-export const createGroup = payload => async dispatch => {
+export const createGroupThunk = payload => async dispatch => {
     const response = await csrfFetch(`/api/groups`, {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -53,6 +61,7 @@ export const createGroup = payload => async dispatch => {
 
     if (response.ok) {
         const newGroup = await response.json();
+        dispatch(createGroup(newGroup))
         return newGroup;
     };
 };
@@ -73,6 +82,12 @@ const groupsReducer = (state = initialState, action) => {
                 group: action.group,
             };
         };
+        case CREATE_GROUP: {
+            return {
+                ...state,
+                group: action.group,
+            }
+        }
         default: {
             return state;
         }

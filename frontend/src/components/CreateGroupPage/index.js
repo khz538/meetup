@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createGroup } from '../../store/groups';
+import { createGroupThunk } from '../../store/groups';
 import * as sessionActions from '../../store/session';
 
 export default function CreateGroupPage() {
@@ -18,18 +18,28 @@ export default function CreateGroupPage() {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        let isPrivate;
+        if (privacy === 'Public') {
+            isPrivate = false;
+        } else {
+            isPrivate = true;
+        }
+
+        let typeString;
+        type === 'online' ? typeString = 'Online' : typeString = "In person";
+
         const payload = {
             name,
             about,
             organizerId: sessionUser.id,
             city,
             state,
-            type,
-            privacy
+            type: typeString,
+            private: isPrivate,
         }
 
-        const newGroup = await dispatch(createGroup(payload));
-        history.push(`/group/${newGroup.id}`);
+        const newGroup = await dispatch(createGroupThunk(payload));
+        history.push(`/groups/${newGroup.id}`);
     };
 
     return (
@@ -71,19 +81,19 @@ export default function CreateGroupPage() {
                             onChange={e => setType(e.target.value)}
                             value={type}
                         >
-                            <option value="option 1">In person</option>
-                            <option value="option 2">Online</option>
+                            <option value='In-Person'>In person</option>
+                            <option value='Online'>Online</option>
                         </select>
                         <label>Group Visibility</label>
                         <select
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
                         >
-                            <option value='private'>true</option>
-                            <option value='public'>false</option>
+                            <option value={privacy}>Public</option>
+                            <option value={privacy}>Private</option>
                         </select>
                     </div>
-                    <button className='submit' type='submit'>
+                    <button className='submit-new-group' type='submit'>
                         Create Group
                     </button>
                 </div>

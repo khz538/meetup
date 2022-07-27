@@ -21,6 +21,7 @@ export default function GroupDetail() {
     }, [dispatch]);
 
     if (!group) return null;
+    if (!group.Organizer) return null;
 
     return (
         <div className='group-detail-page'>
