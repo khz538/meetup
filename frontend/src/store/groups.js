@@ -115,22 +115,34 @@ const groupsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_ALL_GROUPS: {
-            return {
-                ...state,
-                groups: action.groups,
-            };
+            newState = {};
+            action.groups.forEach(group => {
+                newState[group.id] = group;
+            });
+            // newState["groupsArr"] = action.groups;
+            return newState;
+            // return {
+            //     ...state,
+            //     groups: action.groups,
+            // };
         };
         case GET_ONE_GROUP: {
-            return {
-                ...state,
-                group: action.group,
-            };
+            newState = {};
+            newState[action.group.id] = action.group;
+            return newState;
+            // return {
+            //     ...state,
+            //     groups[action.group.id] = action.group,
+            // };
         };
         case CREATE_GROUP: {
-            return {
-                ...state,
-                group: action.group,
-            };
+            newState = { ...state };
+            newState[action.group.id] = action.group;
+            return newState;
+            // return {
+            //     ...state,
+            //     group: action.group,
+            // };
         };
         case EDIT_GROUP: {
             // newState = { ...state }
@@ -139,6 +151,7 @@ const groupsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 [action.group.id]: action.group,
+                // state.groups
             };
         };
         case DELETE_GROUP: {

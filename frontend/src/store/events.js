@@ -32,6 +32,13 @@ const getEventAttendees = attendees => {
     }
 };
 
+const createEvent = event => {
+    return {
+        type: CREATE_EVENT,
+        event,
+    };
+};
+
 // Get all events thunk action creator
 export const getEvents = () => async dispatch => {
     const response = await fetch('/api/events');
@@ -61,6 +68,13 @@ export const getEventAttendeesThunk = eventId => async dispatch => {
         dispatch(getEventAttendees(attendees));
     };
 };
+
+// Create event thunk action creator
+export const createEventThunk = event => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${event.id}/events/new`, {
+        
+    })
+}
 
 const initialState = {};
 const eventsReducer = (state = initialState, action) => {
