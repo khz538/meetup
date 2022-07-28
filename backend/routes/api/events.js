@@ -383,14 +383,14 @@ router.get('/:eventId', async (req, res, next) => {
         'startDate',
         'endDate',
         'numAttending',
-    ]
+    ];
     const groupPayload = [
         'id',
         'name',
         'private',
         'city',
         'state',
-    ]
+    ];
     const venuePayload = [
         'id',
         'address',
@@ -398,7 +398,8 @@ router.get('/:eventId', async (req, res, next) => {
         'state',
         'lat',
         'lng'
-    ]
+    ];
+    
     const event = await Event.findByPk(eventId, {
         attributes: {
             include: eventPayload
@@ -416,6 +417,7 @@ router.get('/:eventId', async (req, res, next) => {
                 //     include: venuePayload
                 // }
             },
+            { model: EventAttendee },
             // {
             //     model: Image,
             //     // as: "images"

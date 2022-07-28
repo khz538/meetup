@@ -13,7 +13,15 @@ const getAllEvents = events => {
         type: GET_ALL_EVENTS,
         events,
     }
-}
+};
+
+// Get event by eventId
+const getOneEvent = event => {
+    return {
+        type:GET_ONE_EVENT,
+        event,
+    };
+};
 
 // Get all events thunk action creator
 export const getEvents = () => async dispatch => {
@@ -24,7 +32,16 @@ export const getEvents = () => async dispatch => {
         dispatch(getAllEvents(events));
         return events;
     }
-}
+};
+
+// Get event by eventId thunk action creator
+export const getOneEventThunk = id => async dispatch => {
+    const response = await fetch(`/api/events/${id}`);
+    if (response.ok) {
+        const event = await response.json();
+        dispatch(getOneEvent(event));
+    };
+};
 
 const initialState = {};
 const eventsReducer = (state = initialState, action) => {
@@ -36,6 +53,15 @@ const eventsReducer = (state = initialState, action) => {
                 ...action.events,
             };
         };
+        case GET_ONE_EVENT: {
+            // newState = { ...state }
+            // newState[action.event.id] = action.event;
+            // return newState;
+            return {
+                ...state,
+                event: action.event,
+            }
+        }
         default: {
             return state;
         }

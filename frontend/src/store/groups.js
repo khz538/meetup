@@ -61,7 +61,7 @@ export const getGroups = () => async dispatch => {
 // Get single group thunk action creator
 export const getGroupById = id => async dispatch => {
     const response = await csrfFetch(`/api/groups/${id}`);
-    console.log('........', response)
+    // console.log('........', response)
     if (response.ok) {
         const group = await response.json();
         // console.log(group)
