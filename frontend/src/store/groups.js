@@ -153,6 +153,8 @@ const groupsReducer = (state = initialState, action) => {
                 [action.group.id]: action.group,
                 // state.groups
             };
+            // newState = { ...state };
+            // newState[action.group.id]: action.group
         };
         case DELETE_GROUP: {
             newState = { ...state };

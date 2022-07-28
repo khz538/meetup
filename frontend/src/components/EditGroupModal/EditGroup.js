@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { editGroupThunk } from '../../store/groups';
+import { editGroupThunk, getGroupById } from '../../store/groups';
 
 export default function EditGroup({ group }) {
     const dispatch = useDispatch();
@@ -40,7 +40,8 @@ export default function EditGroup({ group }) {
         }
 
         const group = await dispatch(editGroupThunk(payload));
-        history.push(`/groups/${group.id}`);
+        const groupById = await dispatch(getGroupById(group.id));
+        // history.push(`/groups/${group.id}`);
     };
 
     if (!group) return null;
