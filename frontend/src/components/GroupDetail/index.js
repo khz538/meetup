@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getGroupById } from '../../store/groups';
+import { useParams, useHistory } from 'react-router-dom';
+import { getGroupById, deleteGroupThunk } from '../../store/groups';
+import EditGroupModal from '../EditGroupModal';
 
 export default function GroupDetail() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { groupId } = useParams();
     const group = useSelector(state => state.groups.group);
-    // const user = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user);
+    const [showModal, setShowModal] = useState(false);
     // console.log('++++++++', group);
 
-    // const isOrganizer = user?.id === group?.organizerId;
+    const isOrganizer = sessionUser?.id === group?.organizerId;
     // async function getDetail(groupId) {
     //     const getGroup = await dispatch(getGroupById(groupId));
     //     const getMembers = await dispatch(getGroupMembers(groupId));
@@ -19,6 +22,12 @@ export default function GroupDetail() {
     useEffect(() => {
         dispatch(getGroupById(groupId));
     }, [dispatch]);
+
+    const handleDelete = async groupId => {
+        console.log(groupId)
+        const awaitDelete = await dispatch(deleteGroupThunk(groupId));
+        history.push('/groups');
+    }
 
     if (!group) return null;
     if (!group.Organizer) return null;
@@ -33,6 +42,8 @@ export default function GroupDetail() {
                     <p>Owner: {group.Organizer.firstName}</p>
                     <p>{group.city}, {group.state}</p>
                     <button>Join This Group</button>
+                    {isOrganizer && <EditGroupModal group={group} />}
+                    {isOrganizer && <button onClick={() => handleDelete(groupId)}>Delete This Group</button>}
                 </div>
             </div>
             <div className='group-detail-lower'>

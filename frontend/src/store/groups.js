@@ -4,6 +4,8 @@ import { csrfFetch } from './csrf';
 const GET_ALL_GROUPS = 'groups/GET_ALL_GROUPS';
 const GET_ONE_GROUP = 'groups/GET_ONE_GROUP';
 const CREATE_GROUP = 'groups/CREATE_GROUP';
+const EDIT_GROUP = 'groups/EDIT_GROUP';
+const DELETE_GROUP = 'groups/DELETE_GROUP'
 
 
 // Get all groups action creator
@@ -27,6 +29,22 @@ const createGroup = group => {
     return {
         type: CREATE_GROUP,
         group,
+    }
+}
+
+// Edit group action creator
+const editGroup = group => {
+    return {
+        type: EDIT_GROUP,
+        group
+    }
+}
+
+// Delete group by group ID action creator
+const deleteGroup = groupId => {
+    return {
+        type: DELETE_GROUP,
+        groupId,
     }
 }
 
@@ -66,6 +84,32 @@ export const createGroupThunk = payload => async dispatch => {
     };
 };
 
+// Edit a group thunk action creator
+export const editGroupThunk = group => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${group.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(group),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        const group = await response.json();
+        dispatch(editGroup(group));
+        return group;
+    }
+}
+
+// Delete a group by its ID thunk action creator
+export const deleteGroupThunk = groupId => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${groupId}`, {
+        method: 'DELETE',
+    });
+    if (response.ok) {
+        dispatch(deleteGroup(groupId));
+        return response.ok;
+    }
+}
+
 const initialState = {};
 const groupsReducer = (state = initialState, action) => {
     let newState;
@@ -86,11 +130,25 @@ const groupsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 group: action.group,
-            }
+            };
+        };
+        case EDIT_GROUP: {
+            // newState = { ...state }
+            // newState[action.group.id] = { ...newState[action.group.id], ...action.group}
+            // return newState;
+            return {
+                ...state,
+                [action.group.id]: action.group,
+            };
+        };
+        case DELETE_GROUP: {
+            newState = { ...state };
+            delete newState[action.groupId];
+            return newState;
         }
         default: {
             return state;
-        }
+        };
     };
 };
 

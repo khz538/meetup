@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getEvents } from '../../store/events';
-import groupsReducer from '../../store/groups';
 
 export default function Events() {
     const dispatch = useDispatch();
@@ -11,8 +10,11 @@ export default function Events() {
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
-
-    if (!events) return null;
+    
+    if (!events || Object.keys(events).length === 0) return null;
+    const eventArr = Object.values(events)[0];
+    // console.log(eventArr[0])
+    // if (!events) return null;
 
     return (
         <div>
@@ -20,7 +22,7 @@ export default function Events() {
                 <h4>Suggested Events</h4>
             </div>
             <div>
-                {events.map(event => {
+                {eventArr.map(event => (
                     <Link to={`/events/${event.id}`}>
                         <div>
                             <div className='img-container'>
@@ -29,13 +31,13 @@ export default function Events() {
                             <div>
                                 <div>
                                     <h3>{event.name}</h3>
-                                    <h4>{event.city}, {event.state}</h4>
-                                    <p>{event.about}</p>
+                                    {/* <h4>{event.Venue.city}, {event.Venue.state}</h4> */}
+                                    <p>{event.description}</p>
                                 </div>
                             </div>
                         </div>
                     </Link>
-                })}
+                ))}
             </div>
         </div>
     )

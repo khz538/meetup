@@ -1,19 +1,20 @@
-// frontend/src/components/CreateGroupPage/index.js
+// frontend/src/components/EditGroup/index.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createGroupThunk } from '../../store/groups';
+import { editGroupThunk } from '../../store/groups';
 
-export default function CreateGroupPage() {
+export default function EditGroup({ group }) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const id = group.id;
     const sessionUser = useSelector(state => state.session.user);
-    const [name, setName] = useState('');
-    const [about, setAbout] = useState('');
-    const [type, setType] = useState('');
-    const [privacy, setPrivacy] = useState(false);
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
+    const [name, setName] = useState(group.name);
+    const [about, setAbout] = useState(group.about);
+    const [type, setType] = useState(group.type);
+    const [privacy, setPrivacy] = useState(group.private);
+    const [city, setCity] = useState(group.city);
+    const [state, setState] = useState(group.state);
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -28,6 +29,7 @@ export default function CreateGroupPage() {
         type === 'online' ? typeString = 'Online' : typeString = "In person";
 
         const payload = {
+            id,
             name,
             about,
             organizerId: sessionUser.id,
@@ -37,9 +39,11 @@ export default function CreateGroupPage() {
             private: isPrivate,
         }
 
-        const newGroup = await dispatch(createGroupThunk(payload));
-        history.push(`/groups/${newGroup.id}`);
+        const group = await dispatch(editGroupThunk(payload));
+        history.push(`/groups/${group.id}`);
     };
+
+    if (!group) return null;
 
     return (
         <div className='create-group-page'>
@@ -92,11 +96,11 @@ export default function CreateGroupPage() {
                             <option value={privacy}>Private</option>
                         </select>
                     </div>
-                    <button className='submit-new-group' type='submit'>
-                        Create Group
+                    <button className='submit-group' type='submit'>
+                        Submit
                     </button>
                 </div>
             </form>
         </div>
     )
-}
+};
