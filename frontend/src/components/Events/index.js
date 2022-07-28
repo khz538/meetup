@@ -5,14 +5,14 @@ import { getEvents } from '../../store/events';
 
 export default function Events() {
     const dispatch = useDispatch();
-    const events = useSelector(state => state.events.events);
-    // console.log('!!!!!!', events)
+    const events = Object.values(useSelector(state => state.events))[0];
+    console.log('!!!!!!', events)
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
     
-    if (!events || Object.keys(events).length === 0) return null;
-    const eventArr = Object.values(events)[0];
+    if (!events || events.length === 0) return null;
+    // const eventArr = Object.values(events)[0];
     // console.log(eventArr[0])
     // if (!events) return null;
 
@@ -22,8 +22,8 @@ export default function Events() {
                 <h4>Suggested Events</h4>
             </div>
             <div>
-                {eventArr.map(event => (
-                    <Link to={`/events/${event.id}`}>
+                {events.map((event, i) => (
+                    <Link key={i} to={`/events/${event.id}`}>
                         <div>
                             <div className='img-container'>
                                 <img src={event.previewImage}></img>

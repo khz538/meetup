@@ -33,7 +33,7 @@ const eventsReducer = (state = initialState, action) => {
         case GET_ALL_EVENTS: {
             return {
                 ...state,
-                events: action.events,
+                ...action.events,
             };
         };
         default: {
