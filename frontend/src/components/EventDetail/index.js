@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { getOneEventThunk, deleteEventThunk } from '../../store/events';
+import { getOneEventThunk, deleteEventThunk, getEventAttendeesThunk } from '../../store/events';
 
 export default function EventDetail() {
     const dispatch = useDispatch();
     const history = useHistory();
     const { eventId } = useParams();
-    const event = useSelector(state => state.events.event);
+    const events = useSelector(state => state.events);
+    console.log(events)
     const sessionUser = useSelector(state => state.session.user);
-    // console.log('------------', event);
-
+    
+    async function thunks(id) {
+        const awaitEvent = await dispatch(getOneEventThunk(id));
+        const awaitAttendees = await dispatch(getEventAttendeesThunk(id));
+    };
+    
     useEffect(() => {
-        dispatch(getOneEventThunk(eventId));
+        thunks(eventId);
     }, [dispatch]);
+    
+    if (!events || Object.values(events).length === 0) return null;
+    const attendees = events.attendees;
+    console.log(attendees)
+    const event = events.event;
+    if (!attendees || !event) return null;
 
-    if (!event) return null;
     return (
         <div>
             <div>
@@ -27,6 +37,12 @@ export default function EventDetail() {
                     <p>{event.Group.name}</p>
                     <p>{event.Venue.city}, {event.Venue.state}</p>
                 </div>
+                <div>
+                    <p>{attendees.Attendees.map(attendee => (
+                        <p>{attendee.firstName}</p>
+                    ))}</p>
+                </div>
+
             </div>
         </div>
     );
