@@ -8,7 +8,7 @@ export default function EventDetail() {
     const history = useHistory();
     const { eventId } = useParams();
     const events = useSelector(state => state.events);
-    console.log(events)
+    // console.log(events)
     const sessionUser = useSelector(state => state.session.user);
     
     async function thunks(id) {
@@ -23,7 +23,7 @@ export default function EventDetail() {
     if (!events || Object.values(events).length === 0) return null;
     const event = events[eventId];
     const attendees = events.attendees;
-    console.log(attendees)
+    // console.log(attendees)
     if (!attendees || !event) return null;
 
     return (

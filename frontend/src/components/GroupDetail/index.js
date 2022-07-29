@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getGroupById, deleteGroupThunk, getGroups } from '../../store/groups';
 import EditGroupModal from '../EditGroupModal';
+import CreateEventModal from '../CreateEventModal';
 
 export default function GroupDetail() {
     const dispatch = useDispatch();
@@ -35,6 +36,13 @@ export default function GroupDetail() {
     if (!group) return null;
     // if (!group.Organizer) return null;
 
+    const handleCreateEvent = () => {
+        history.push(
+            {pathname: '/events/create',
+            group,}
+        );
+    }
+
     return (
         <div className='group-detail-page'>
             <div className='group-detail-upper'>
@@ -47,6 +55,7 @@ export default function GroupDetail() {
                     <button>Join This Group</button>
                     {isOrganizer && <EditGroupModal group={group} />}
                     {isOrganizer && <button onClick={() => handleDelete(groupId)}>Delete This Group</button>}
+                    {isOrganizer && <CreateEventModal group={group} />}
                 </div>
             </div>
             <div className='group-detail-lower'>

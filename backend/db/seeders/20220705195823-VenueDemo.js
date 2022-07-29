@@ -40,6 +40,14 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Venues', [
+      {
+        groupId: 1,
+        address: 'Online',
+        city: 'Online',
+        state: 'Online',
+        lat: 0,
+        lng: 0,
+      },
     {
       groupId: 2,
       address: 'AAA',

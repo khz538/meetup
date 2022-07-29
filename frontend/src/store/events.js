@@ -71,6 +71,7 @@ export const getEventAttendeesThunk = eventId => async dispatch => {
 
 // Create event thunk action creator
 export const createEventThunk = payload => async dispatch => {
+    console.log('-----',payload)
     const response = await csrfFetch(`/api/groups/${payload.groupId}/events/new`, {
         method: 'POST',
         body: JSON.stringify(payload),
