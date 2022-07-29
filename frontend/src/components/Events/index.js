@@ -5,8 +5,9 @@ import { getEvents } from '../../store/events';
 
 export default function Events() {
     const dispatch = useDispatch();
-    const events = Object.values(useSelector(state => state.events))[0];
-    console.log('!!!!!!', events)
+    const events = Object.values(useSelector(state => state.events));
+    console.log('!!!!!!', events);
+    
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);

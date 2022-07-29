@@ -21,9 +21,9 @@ export default function EventDetail() {
     }, [dispatch]);
     
     if (!events || Object.values(events).length === 0) return null;
+    const event = events[eventId];
     const attendees = events.attendees;
     console.log(attendees)
-    const event = events.event;
     if (!attendees || !event) return null;
 
     return (
@@ -46,4 +46,4 @@ export default function EventDetail() {
             </div>
         </div>
     );
-}
+};

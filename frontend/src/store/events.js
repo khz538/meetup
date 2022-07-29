@@ -47,7 +47,7 @@ export const getEvents = () => async dispatch => {
         // console.log(events, '----------------------------')
         dispatch(getAllEvents(events));
         return events;
-    }
+    };
 };
 
 // Get event by eventId thunk action creator
@@ -70,37 +70,49 @@ export const getEventAttendeesThunk = eventId => async dispatch => {
 };
 
 // Create event thunk action creator
-export const createEventThunk = event => async dispatch => {
-    const response = await csrfFetch(`/api/groups/${event.id}/events/new`, {
-        
-    })
-}
+export const createEventThunk = payload => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${payload.groupId}/events/new`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        const newEvent = await response.json();
+        dispatch(createEvent(newEvent));
+        return newEvent;
+    };
+};
 
 const initialState = {};
 const eventsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_ALL_EVENTS: {
-            return {
-                ...state,
-                ...action.events,
-            };
+            newState = {};
+            // console.log(action.events.Events)
+            action.events.Events.forEach(event => {
+                newState[event.id] = event;
+            });
+            // console.log(newState)
+            return newState;
         };
         case GET_ONE_EVENT: {
-            // newState = { ...state }
-            // newState[action.event.id] = action.event;
-            // return newState;
-            return {
-                ...state,
-                event: action.event,
-            }
+            newState = {};
+            newState[action.event.id] = action.event;
+            return newState;
         };
         case GET_EVENT_ATTENDEES: {
             return {
                 ...state,
                 attendees: action.attendees,
-            }
-        }
+            };
+        };
+        case CREATE_EVENT: {
+            newState = { ...state };
+            newState[action.event.id] = action.event;
+            return newState;
+        };
         default: {
             return state;
         }
