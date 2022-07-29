@@ -20,7 +20,7 @@ module.exports = {
         unique: true,
       },
       about: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10000),
       },
       type: {
         type: Sequelize.STRING,

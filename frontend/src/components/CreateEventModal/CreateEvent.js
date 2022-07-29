@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { createEventThunk, getOneEventThunk } from '../../store/events';
-import { getGroupById } from '../../store/groups';
+import DenyAccessPage from '../DenyAccessPage';
+// import { getGroupById } from '../../store/groups';
 
 export default function CreateEvent({ group }) {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function CreateEvent({ group }) {
     const [description, setDescription] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [validationErrors, setValidationErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     function timeChanger (time) {
@@ -27,7 +28,7 @@ export default function CreateEvent({ group }) {
         timeArr[1] = clock + ':00';
         let result = timeArr.join(' ');
         return result;
-    }
+    };
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -70,6 +71,8 @@ export default function CreateEvent({ group }) {
     
     if (!group) return null;
     // console.log(group)
+    const isLoggedIn = sessionUser;
+    if (!isLoggedIn) return <DenyAccessPage />
     
     return (
         <div className='create-event-page'>
