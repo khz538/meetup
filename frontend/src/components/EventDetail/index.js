@@ -13,6 +13,7 @@ export default function EventDetail() {
     
     async function thunks(id) {
         const awaitEvent = await dispatch(getOneEventThunk(id));
+        // console.log(awaitEvent);
         const awaitAttendees = await dispatch(getEventAttendeesThunk(id));
     };
     

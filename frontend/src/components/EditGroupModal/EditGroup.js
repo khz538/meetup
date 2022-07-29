@@ -42,7 +42,7 @@ export default function EditGroup({ group, onClose }) {
 
         const group = await dispatch(editGroupThunk(payload));
         const groupById = await dispatch(getGroupById(group.id));
-        // history.push(`/groups/${group.id}`);
+        history.push(`/groups/${group.id}`);
     };
 
     if (!group) return null;
@@ -89,7 +89,7 @@ export default function EditGroup({ group, onClose }) {
                             <option value='In-Person'>In person</option>
                             <option value='Online'>Online</option>
                         </select>
-                        <label>Group Visibility</label>
+                        <label>isPrivate</label>
                         <select
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
