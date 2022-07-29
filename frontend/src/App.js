@@ -11,7 +11,6 @@ import Events from "./components/Events";
 import CreateGroupPage from "./components/CreateGroupPage";
 import EditGroupPage from "./components/EditGroupModal";
 import EventDetail from "./components/EventDetail";
-import CreateEventPage from "./components/CreateEventModal";
 
 function App() {
   const dispatch = useDispatch();

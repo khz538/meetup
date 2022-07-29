@@ -52,7 +52,6 @@ export default function GroupDetail() {
                     <p>{group.numMembers} member(s)</p>
                     <p>Owner: {group.Organizer && group.Organizer.firstName}</p>
                     <p>{group.city}, {group.state}</p>
-                    <button>Join This Group</button>
                     {isOrganizer && <EditGroupModal group={group} />}
                     {isOrganizer && <button onClick={() => handleDelete(groupId)}>Delete This Group</button>}
                     {isOrganizer && <CreateEventModal group={group} />}
@@ -66,8 +65,8 @@ export default function GroupDetail() {
                 <div className='members'>
                     <h3>Organizer</h3>
                     <p>{group.Organizer && group.Organizer.firstName} {group.Organizer && group.Organizer.lastName}</p>
-                    <h3>Members</h3>
-                    {group.Members && group.Members.map((member, i) => <p key={i}>{member.firstName} {member.lastName}</p>)}
+                    {/* <h3>Members</h3> */}
+                    {/* {group.Members && group.Members.map((member, i) => <p key={i}>{member.firstName} {member.lastName}</p>)} */}
                 </div>
             </div>
         </div>

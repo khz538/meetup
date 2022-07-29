@@ -443,11 +443,11 @@ router.get('/:eventId', async (req, res, next) => {
     const eventJSON = event.toJSON();
     eventJSON.images = imageArr;
     delete eventJSON.Images;
-    delete eventJSON.Group.organizerId;
+    // delete eventJSON.Group.organizerId;
     delete eventJSON.Group.about;
     delete eventJSON.Group.type;
     delete eventJSON.Group.numMembers;
-    delete eventJSON.Group.previewImage;
+    // delete eventJSON.Group.previewImage;
     delete eventJSON.Group.createdAt;
     delete eventJSON.Group.updatedAt;
     delete eventJSON.Venue.groupId;

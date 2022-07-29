@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getOneEventThunk, deleteEventThunk, getEventAttendeesThunk } from '../../store/events';
+import './EventDetail.css';
 
 export default function EventDetail() {
     const dispatch = useDispatch();
@@ -28,12 +29,14 @@ export default function EventDetail() {
     if (!attendees || !event) return null;
 
     const handleDelete = async eventId => {
-        console.log(eventId);
+        // console.log(eventId);
         const awaitDelete = await dispatch(deleteEventThunk(eventId));
         history.push('/events');
     };
 
-    // const isOrganizer
+    const isOrganizer = sessionUser?.id === event?.Group?.organizerId;
+    // console.log(isOrganizer);
+    const isOnline = event?.Venue?.city === 'Online';
 
     return (
         <div>
@@ -44,13 +47,15 @@ export default function EventDetail() {
                     <p>{event.description}</p>
                     <p>{event.numAttending}</p>
                     <p>{event.Group.name}</p>
-                    <p>{event.Venue.city}, {event.Venue.state}</p>
+                    {!isOnline && <p>{event.Venue.city}, {event.Venue.state}</p>}
+                    {isOnline && <p>Online</p>}
+                    {isOrganizer && <button className='delete-button' onClick={() => handleDelete(eventId)}>Delete This Event</button>}
                 </div>
-                <div>
+                {/* <div>
                     <p>{attendees.Attendees.map(attendee => (
                         <p>{attendee.firstName}</p>
                     ))}</p>
-                </div>
+                </div> */}
 
             </div>
         </div>

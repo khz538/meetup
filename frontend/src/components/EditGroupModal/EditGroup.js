@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editGroupThunk, getGroupById } from '../../store/groups';
 
-export default function EditGroup({ group, onClose }) {
+export default function EditGroup({ group, closeModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const id = group.id;
@@ -42,7 +42,8 @@ export default function EditGroup({ group, onClose }) {
 
         const group = await dispatch(editGroupThunk(payload));
         const groupById = await dispatch(getGroupById(group.id));
-        history.push(`/groups/${group.id}`);
+        // history.push(`/groups/${group.id}`);
+        await closeModal(false);
     };
 
     if (!group) return null;

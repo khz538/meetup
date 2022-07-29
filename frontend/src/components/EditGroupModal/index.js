@@ -5,13 +5,14 @@ import EditGroup from './EditGroup';
 
 function EditGroupModal({ group }) {
   const [showModal, setShowModal] = useState(false);
-
+  // function that returns setShwoMOdalfalse and pass as prop
+  const closeModal = (bool) => setShowModal(bool);
   return (
     <>
       <button onClick={() => setShowModal(true)}>Edit Group</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditGroup group={group} />
+          <EditGroup group={group} closeModal={closeModal} />
         </Modal>
       )}
     </>
