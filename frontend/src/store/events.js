@@ -32,10 +32,19 @@ const getEventAttendees = attendees => {
     }
 };
 
+// create event
 const createEvent = event => {
     return {
         type: CREATE_EVENT,
         event,
+    };
+};
+
+// Delete event by eventId
+const deleteEvent = eventId => {
+    return {
+        type: DELETE_EVENT,
+        eventId,
     };
 };
 
@@ -71,7 +80,7 @@ export const getEventAttendeesThunk = eventId => async dispatch => {
 
 // Create event thunk action creator
 export const createEventThunk = payload => async dispatch => {
-    console.log('-----',payload)
+    // console.log('-----',payload)
     const response = await csrfFetch(`/api/groups/${payload.groupId}/events/new`, {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -84,6 +93,17 @@ export const createEventThunk = payload => async dispatch => {
         return newEvent;
     };
 };
+
+// Delete event thunk action creator
+export const deleteEventThunk = eventId => async dispatch => {
+    const response = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE',
+    });
+    if (response.ok) {
+        dispatch(deleteEvent(eventId));
+        return response.ok;
+    }
+}
 
 const initialState = {};
 const eventsReducer = (state = initialState, action) => {
@@ -114,6 +134,11 @@ const eventsReducer = (state = initialState, action) => {
             newState[action.event.id] = action.event;
             return newState;
         };
+        case DELETE_EVENT: {
+            newState = { ...state };
+            delete newState[action.eventId];
+            return newState;
+        }
         default: {
             return state;
         }

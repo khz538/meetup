@@ -26,6 +26,14 @@ export default function EventDetail() {
     // console.log(attendees)
     if (!attendees || !event) return null;
 
+    const handleDelete = async eventId => {
+        console.log(eventId);
+        const awaitDelete = await dispatch(deleteEventThunk(eventId));
+        history.push('/events');
+    };
+
+    // const isOrganizer
+
     return (
         <div>
             <div>

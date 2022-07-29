@@ -28,7 +28,7 @@ export default function GroupDetail() {
     }, [dispatch]);
 
     const handleDelete = async groupId => {
-        console.log(groupId)
+        // console.log(groupId)
         const awaitDelete = await dispatch(deleteGroupThunk(groupId));
         history.push('/groups');
     }
@@ -36,12 +36,12 @@ export default function GroupDetail() {
     if (!group) return null;
     // if (!group.Organizer) return null;
 
-    const handleCreateEvent = () => {
-        history.push(
-            {pathname: '/events/create',
-            group,}
-        );
-    }
+    // const handleCreateEvent = () => {
+    //     history.push(
+    //         {pathname: '/events/create',
+    //         group,}
+    //     );
+    // };
 
     return (
         <div className='group-detail-page'>
