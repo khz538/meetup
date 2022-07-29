@@ -4,6 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getGroupById, deleteGroupThunk, getGroups } from '../../store/groups';
 import EditGroupModal from '../EditGroupModal';
 import CreateEventModal from '../CreateEventModal';
+import './GroupDetail.css';
 
 export default function GroupDetail() {
     const dispatch = useDispatch();

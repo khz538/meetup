@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getEvents } from '../../store/events';
+import GroupsAndEventsNav from '../GroupsAndEventsNav';
 
 export default function Events() {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function Events() {
 
     return (
         <div>
+            <GroupsAndEventsNav />
             <div>
                 <h4>Suggested Events</h4>
             </div>

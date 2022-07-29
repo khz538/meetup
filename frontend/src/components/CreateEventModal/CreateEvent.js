@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { createEventThunk } from '../../store/events';
+import { createEventThunk, getOneEventThunk } from '../../store/events';
 import { getGroupById } from '../../store/groups';
 
 export default function CreateEvent({ group }) {
@@ -63,7 +63,8 @@ export default function CreateEvent({ group }) {
         };
 
         const newEvent = await dispatch(createEventThunk(payload));
-        console.log(newEvent);
+        const getNewEvent = await dispatch(getOneEventThunk(newEvent.id));
+        // console.log(newEvent);
         history.push(`/events/${newEvent.id}`);
     };
     

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getGroups } from '../../store/groups';
+import GroupsAndEventsNav from '../GroupsAndEventsNav';
 
 export default function Groups() {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function Groups() {
 
     return (
         <div className='all-groups-list'>
+            <GroupsAndEventsNav />
             <div>
                 <h4>Suggested Groups</h4>
             </div>
