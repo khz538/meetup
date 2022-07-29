@@ -1,7 +1,7 @@
 // frontend/src/components/CreateEventPage/index.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { createEventThunk } from '../../store/events';
 
 export default function CreateEventPage() {
