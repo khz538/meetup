@@ -35,7 +35,8 @@ export default function Groups() {
                                 </div>
                                 <div>
                                     <p>{group.numMembers}</p>
-                                    <p>{group.private.toString()}</p>
+                                    {!!group.private && <p>Private Group</p>}
+                                    {!group.private && <p>Public Group</p>}
                                 </div>
                             </div>
                         </div>

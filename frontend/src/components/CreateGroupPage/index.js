@@ -14,15 +14,14 @@ export default function CreateGroupPage() {
     const [privacy, setPrivacy] = useState(false);
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const handleSubmit = async e => {
         e.preventDefault();
+        
         let isPrivate;
-        if (privacy === 'Public') {
-            isPrivate = false;
-        } else {
-            isPrivate = true;
-        }
+        privacy === 'Public' ? isPrivate = false : isPrivate = true;
 
         let typeString;
         type === 'online' ? typeString = 'Online' : typeString = "In person";
@@ -88,8 +87,8 @@ export default function CreateGroupPage() {
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
                         >
-                            <option value={privacy}>Public</option>
-                            <option value={privacy}>Private</option>
+                            <option value='Public'>Public</option>
+                            <option value='Private'>Private</option>
                         </select>
                     </div>
                     <button className='submit-new-group' type='submit'>

@@ -44,19 +44,6 @@ const HomePage = () => {
                         <Link to='/groups'>Connect →</Link>
                     </div>
                 </div>
-                <div className='search'>
-                    <h2>What do you want to do?</h2>
-                    <form className='searchForm'>
-                        <label>
-                            <input 
-                                type='text'
-                                value={search}
-                                onChange={e => setSearch(e.target.value)}
-                            />
-                        </label>
-                        <button type='submit'>Search</button>
-                    </form>
-                </div>
                 <div className='how-meetup-works-blurb'>
                     <h1>How Meetup works</h1>
                     <p>Meet new people who share mutual interests</p>
@@ -81,10 +68,6 @@ const HomePage = () => {
                 </div>
                 <div>
                     <button>Join Meetup</button>
-                </div>
-                <div>
-                    Create your own group.
-                    <button>Get Started</button>
                 </div>
             </div>
         </div>

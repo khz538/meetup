@@ -94,6 +94,7 @@ export const editGroupThunk = group => async dispatch => {
 
     if (response.ok) {
         const group = await response.json();
+        console.log('group from backend', group);
         dispatch(editGroup(group));
         return group;
     }

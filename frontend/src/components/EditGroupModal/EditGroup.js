@@ -12,18 +12,18 @@ export default function EditGroup({ group, closeModal }) {
     const [name, setName] = useState(group.name);
     const [about, setAbout] = useState(group.about);
     const [type, setType] = useState(group.type);
-    const [privacy, setPrivacy] = useState(group.private);
+    const [privacy, setPrivacy] = useState(() => {
+        if (group.private === true) return 'Private';
+        if (group.private === false) return 'Public';
+    });
     const [city, setCity] = useState(group.city);
     const [state, setState] = useState(group.state);
 
     const handleSubmit = async e => {
         e.preventDefault();
+
         let isPrivate;
-        if (privacy === 'Public') {
-            isPrivate = false;
-        } else {
-            isPrivate = true;
-        }
+        privacy === 'Public' ? isPrivate = false : isPrivate = true;
 
         let typeString;
         type === 'online' ? typeString = 'Online' : typeString = "In person";
@@ -38,7 +38,7 @@ export default function EditGroup({ group, closeModal }) {
             type: typeString,
             private: isPrivate,
         }
-
+        console.log('payoad', payload);
 
         const group = await dispatch(editGroupThunk(payload));
         const groupById = await dispatch(getGroupById(group.id));
@@ -95,8 +95,8 @@ export default function EditGroup({ group, closeModal }) {
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
                         >
-                            <option value={privacy}>Public</option>
-                            <option value={privacy}>Private</option>
+                            <option value='Public'>Public</option>
+                            <option value='Private'>Private</option>
                         </select>
                     </div>
                     <button className='submit-group' type='submit'>
