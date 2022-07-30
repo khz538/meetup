@@ -13,7 +13,7 @@ export default function GroupDetail() {
     const group = useSelector(state => state.groups)[groupId];
     // console.log('groups',groups);
     // const group = groups[groupId];
-    console.log('group',group);
+    // console.log('group',group);
     const sessionUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
     // console.log('++++++++', group);

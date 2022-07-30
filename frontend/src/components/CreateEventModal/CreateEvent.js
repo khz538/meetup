@@ -9,7 +9,7 @@ import DenyAccessPage from '../DenyAccessPage';
 export default function CreateEvent({ group }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session?.user);
     // const { groupId } = useParams();
     const [venueId, setVenueId] = useState('')
     const [name, setName] = useState('');
@@ -43,7 +43,7 @@ export default function CreateEvent({ group }) {
         if (!startDate) newErrors.push('Start date is required');
         if (!endDate) newErrors.push('End date is required');
         setErrors(newErrors);
-        console.log(errors)
+        // console.log(errors)
     }, [name, capacity, price, description, startDate, endDate]);
 
     async function handleSubmit(e) {

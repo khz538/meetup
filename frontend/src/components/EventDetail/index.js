@@ -15,7 +15,7 @@ export default function EventDetail() {
     async function thunks(id) {
         const awaitEvent = await dispatch(getOneEventThunk(id));
         // console.log(awaitEvent);
-        const awaitAttendees = await dispatch(getEventAttendeesThunk(id));
+        // const awaitAttendees = await dispatch(getEventAttendeesThunk(id));
     };
     
     useEffect(() => {
@@ -24,9 +24,10 @@ export default function EventDetail() {
     
     if (!events || Object.values(events).length === 0) return null;
     const event = events[eventId];
-    const attendees = events.attendees;
+    // const attendees = events.attendees;
     // console.log(attendees)
-    if (!attendees || !event) return null;
+    // if (!attendees || !event) return null;
+    if (!event) return null;
 
     const handleDelete = async eventId => {
         // console.log(eventId);
@@ -37,6 +38,7 @@ export default function EventDetail() {
     const isOrganizer = sessionUser?.id === event?.Group?.organizerId;
     // console.log(isOrganizer);
     const isOnline = event?.Venue?.city === 'Online';
+    const isLoggedIn = sessionUser;
 
     return (
         <div>
