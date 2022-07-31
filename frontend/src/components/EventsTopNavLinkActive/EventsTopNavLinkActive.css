@@ -1,0 +1,29 @@
+#outer-wrapper {
+  display: flex;
+  margin: 180px 0 0;
+  font-size: larger;
+  /* justify-content: space-evenly; */
+  align-items: flex-start;
+}
+
+.navLink {
+  font-weight: 700;
+}
+
+#events-navlink-div {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
+
+#events-nav-active {
+  color: rgb(0,130,148);
+}
+
+#events-navlink-active-div {
+  border-bottom: 4px solid rgb(0, 130, 148);
+  margin-right: 15px;
+}
+
+#events-navlink-div {
+  margin-right: 15px;
+}

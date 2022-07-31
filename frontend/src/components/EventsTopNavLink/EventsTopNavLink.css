@@ -1,0 +1,25 @@
+#events-navlink-div {
+  display: flex;
+  margin: 180px 0 0;
+  font-size: larger;
+  /* justify-content: space-evenly; */
+  align-items: flex-start;
+  width:fit-content;
+}
+
+.navLink {
+  font-weight: 700;
+}
+
+#events-navlink-div {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
+
+#events-nav {
+  color: 757575;
+}
+
+#events-navlink-div {
+  margin-right: 15px;
+}

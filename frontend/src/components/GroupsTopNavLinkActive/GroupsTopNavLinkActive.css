@@ -1,0 +1,21 @@
+#groups-navlink-active-div {
+  display: flex;
+  font-size: larger;
+  /* justify-content: space-evenly; */
+  align-items: flex-start;
+  width: fit-content;
+  border-bottom: 4px solid rgb(0, 130, 148);
+}
+
+.navLink {
+  font-weight: 700;
+}
+
+.navlink-active-div {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
+
+#groups-active-nav {
+  color: rgb(0,130,148);
+}

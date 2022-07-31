@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getEvents } from '../../store/events';
-import GroupsAndEventsNav from '../GroupsAndEventsNav';
+import EventsTopNavLinkActive from '../EventsTopNavLinkActive';
 
 export default function Events() {
     const dispatch = useDispatch();
     const events = Object.values(useSelector(state => state.events));
     console.log('!!!!!!', events);
-    
+
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
-    
+
     if (!events || events.length === 0) return null;
     // const eventArr = Object.values(events)[0];
     // console.log(eventArr[0])
@@ -20,7 +20,7 @@ export default function Events() {
 
     return (
         <div>
-            <GroupsAndEventsNav />
+            <EventsTopNavLinkActive />
             <div>
                 <h4>Suggested Events</h4>
             </div>
