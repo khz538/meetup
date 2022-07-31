@@ -7,12 +7,12 @@ import GroupsAndEventsNav from '../GroupsAndEventsNav';
 export default function Events() {
     const dispatch = useDispatch();
     const events = Object.values(useSelector(state => state.events));
-    console.log('!!!!!!', events);
-    
+    // console.log('!!!!!!', events);
+
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
-    
+
     if (!events || events.length === 0) return null;
     // const eventArr = Object.values(events)[0];
     // console.log(eventArr[0])

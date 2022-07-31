@@ -55,7 +55,7 @@ export default function EditGroup({ group, closeModal }) {
             type: typeString,
             private: isPrivate,
         }
-        console.log('payoad', payload);
+        // console.log('payoad', payload);
 
         const group = await dispatch(editGroupThunk(payload));
         const groupById = await dispatch(getGroupById(group.id));
