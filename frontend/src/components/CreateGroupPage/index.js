@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createGroupThunk } from '../../store/groups';
+// import BottomBar from '../BottomBar';
 import DenyAccessPage from '../DenyAccessPage';
 
 export default function CreateGroupPage() {
@@ -52,7 +53,7 @@ export default function CreateGroupPage() {
             state,
             type: typeString,
             private: isPrivate,
-        }
+        };
 
         const newGroup = await dispatch(createGroupThunk(payload));
         history.push(`/groups/${newGroup.id}`);
@@ -138,6 +139,7 @@ export default function CreateGroupPage() {
                     </button>
                 </div>
             </form>
+            {/* <BottomBar /> */}
         </div>
     )
 }

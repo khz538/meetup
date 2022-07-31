@@ -1,10 +1,10 @@
 import React from "react";
-
+import { Link } from 'react-router-dom'
 export default function BottomBar() {
     return (
-        <div>
+        <div className="bottom-bar">
             Create your own group.
-            <button><Link to='/groups/start'></Link></button>
+            <button className="button" id="get-started-btn"><Link to='/groups/start'>Get Started</Link></button>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 // frontend/src/components/EditGroup/index.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editGroupThunk, getGroupById } from '../../store/groups';
@@ -18,9 +18,26 @@ export default function EditGroup({ group, closeModal }) {
     });
     const [city, setCity] = useState(group.city);
     const [state, setState] = useState(group.state);
+    const [errors, setErrors] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    // const isLoggedIn = sessionUser;
+
+    useEffect(() => {
+        const newErrors = [];
+        if (name.length > 60) newErrors.push('Name must be shorter than 60 characters');
+        if (!name.length) newErrors.push('Name is required');
+        if (about.length < 50 || about.length > 1000) newErrors.push('About must be longer than 50 characters and shorter than 1000');
+        if (!about.length) newErrors.push('About is required');
+        if (!city.length) newErrors.push('City is required');
+        if (!state.length) newErrors.push('State/Province is required');
+        setErrors(newErrors);
+    }, [name, about, city, state]);
 
     const handleSubmit = async e => {
         e.preventDefault();
+        setHasSubmitted(true);
+
 
         let isPrivate;
         privacy === 'Public' ? isPrivate = false : isPrivate = true;
@@ -49,12 +66,92 @@ export default function EditGroup({ group, closeModal }) {
     if (!group) return null;
 
     return (
-        <div className='create-group-page'>
+        // <div className='edit-group-page'>
+        //     <form onSubmit={handleSubmit}>
+        //         <div className='edit-group-inner'>
+        //             <ul>
+        //                 {hasSubmitted && errors.length > 0 &&
+        //                 errors.map((error, i) => 
+        //                 <li key={i}>{error}</li>)}
+        //             </ul>
+        //             <div className='input-fields'>
+        //                 <label>Name</label>
+        //                 <input
+        //                     placeholder='Name your group!'
+        //                     className='input-field'
+        //                     type='text'
+        //                     value={name}
+        //                     onChange={e => setName(e.target.value)}
+        //                     required
+        //                 />
+        //                 <label>About</label>
+        //                 <input
+        //                     placeholder='About your group...'
+        //                     className='input-field'
+        //                     type='text'
+        //                     value={about}
+        //                     onChange={e => setAbout(e.target.value)}
+        //                     required
+        //                 />
+        //                 <label>City</label>
+        //                 <input
+        //                     placeholder='Enter a city'
+        //                     className='input-field'
+        //                     type='text'
+        //                     value={city}
+        //                     onChange={e => setCity(e.target.value)}
+        //                     required
+        //                 />
+        //                 <label>State/Province</label>
+        //                 <input
+        //                     placeholder='Enter a state/province'
+        //                     className='input-field'
+        //                     type='text'
+        //                     value={state}
+        //                     onChange={e => setState(e.target.value)}
+        //                     required
+        //                 />
+        //                 <label>Type</label>
+        //                 <select
+        //                     placeholder='In-Person'
+        //                     onChange={e => setType(e.target.value)}
+        //                     value={type}
+        //                     required
+        //                 >
+        //                     <option value='In-Person'>In person</option>
+        //                     <option value='Online'>Online</option>
+        //                 </select>
+        //                 <label>Group Visibility</label>
+        //                 <select
+        //                     onChange={e => setPrivacy(e.target.value)}
+        //                     value={privacy}
+        //                     required
+        //                     placeholder='Private'
+        //                 >
+        //                     <option value='Public'>Public</option>
+        //                     <option value='Private'>Private</option>
+        //                 </select>
+        //             </div>
+        //             <button className='submit-group' type='submit' disabled={errors.length}>
+        //                 Submit
+        //             </button>
+        //         </div>
+        //     </form>
+        // </div>
+        <div className='edit-group-page'>
             <form onSubmit={handleSubmit}>
-                <div className='create-group-inner'>
+                <div className='errors-div'>
+                    <ul>
+                        {errors.length > 0 &&
+                        errors.map((error, i) => 
+                        <li key={i}>{error}</li>)}
+                    </ul>
+                </div>
+                <div className='edit-group-inner'>
                     <div className='input-fields'>
                         <label>Name</label>
                         <input
+                            placeholder='Name your group!'
                             className='input-field'
                             type='text'
                             value={name}
@@ -63,43 +160,57 @@ export default function EditGroup({ group, closeModal }) {
                         />
                         <label>About</label>
                         <input
+                            placeholder='About your group...'
                             className='input-field'
                             type='text'
                             value={about}
                             onChange={e => setAbout(e.target.value)}
+                            required
                         />
                         <label>City</label>
                         <input
+                            placeholder='Enter a city'
                             className='input-field'
                             type='text'
                             value={city}
                             onChange={e => setCity(e.target.value)}
+                            required
                         />
                         <label>State/Province</label>
                         <input
+                            placeholder='Enter a state/province'
                             className='input-field'
                             type='text'
                             value={state}
                             onChange={e => setState(e.target.value)}
+                            required
                         />
                         <label>Type</label>
                         <select
+                            placeholder='In-Person'
                             onChange={e => setType(e.target.value)}
                             value={type}
+                            required
                         >
                             <option value='In-Person'>In person</option>
                             <option value='Online'>Online</option>
                         </select>
-                        <label>isPrivate</label>
+                        <label>Group Visibility</label>
                         <select
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
+                            required
+                            placeholder='Private'
                         >
                             <option value='Public'>Public</option>
                             <option value='Private'>Private</option>
                         </select>
                     </div>
-                    <button className='submit-group' type='submit'>
+                    <button
+                        className='submit-new-group'
+                        type='submit'
+                        disabled={errors.length}
+                    >
                         Submit
                     </button>
                 </div>

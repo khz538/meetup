@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getGroups } from '../../store/groups';
+import BottomBar from '../BottomBar';
 import GroupsAndEventsNav from '../GroupsAndEventsNav';
 
 export default function Groups() {
@@ -34,15 +35,16 @@ export default function Groups() {
                                     <p>{group.about}</p>
                                 </div>
                                 <div>
-                                    <p>{group.numMembers}</p>
-                                    {!!group.private && <p>Private Group</p>}
-                                    {!group.private && <p>Public Group</p>}
+                                    <p>{group.numMembers} Members</p>
+                                    {!!group.private && <p>Private</p>}
+                                    {!group.private && <p>Public</p>}
                                 </div>
                             </div>
                         </div>
                     </Link>
                 ))}
             </div>
+            <BottomBar />
         </div>
     )
 };
