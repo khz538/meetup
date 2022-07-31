@@ -43,9 +43,9 @@ function ProfileButton({ user }) {
         <div className="profile-dropdown">
           <label>{user.username}</label>
           <label>{user.email}</label>
-          <Link className="userprof-link" to="/user-profile">
+          {/* <Link className="userprof-link" to="/user-profile">
             User Profile
-          </Link>
+          </Link> */}
           <div>
             <button className="logout-btn" onClick={logout}>
               Log Out
