@@ -23,15 +23,36 @@ const HomePage = () => {
         <div>
             <div className='body'>
                 <div className='upper-portion'>
-                    <h1 className='h1' id='welcome-message-h1'>Welcome to Meetup</h1>
-                    <div className='join-or-sign-up'>
-                        {!sessionUser && <h3>Sign Up or click Demo to use</h3>}
-                        <h3>Join a group!</h3>
+                    <div className='upper-left-side'>
+                        <h1 className='h1' id='welcome-message-h1'>Celebrating 20 years of real connections on Meetup</h1>
+                        <div className='join-or-sign-up'>
+                            {!sessionUser && <p className='welcome-message'>So happy to see you here! </p>}
+                            {!sessionUser && <h4 className='welcome-message'>Sign up, or click Demo to use!</h4>}
+                            {sessionUser && <p id='welcome-message'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>}
+                        </div>
                     </div>
-                    <div><img src={computerdesk}></img></div>
+                    <div className='upper-right-side'><img className='first-image'src={computerdesk}></img></div>
                 </div>
                 <div className='cardGrid'>
                     <div className='card-container'>
+                        <Link className='card-link link' to='/groups'>
+                            <img className='card-image' src={cardGridImg1} alt='woman smiling at desk'></img>
+                            <p>Make new friends →</p>
+                        </Link>
+                    </div>
+                    <div className='card-container'>
+                        <Link className='card-link link' to='/groups'>
+                            <img className='card-image' src={cardGridImg2} alt='people hiking'></img>
+                            <p>Explore →</p>
+                        </Link>
+                    </div>
+                    <div className='card-container'>
+                        <Link className='card-link link' to='/groups'>
+                            <img className='card-image' src={cardGridImg3} alt='man at desk working'></img>
+                            <p>Connect →</p>
+                        </Link>
+                    </div>
+                    {/* <div className='card-container'>
                         <img className='card-image' src={cardGridImg1} alt='woman smiling at desk'></img>
                         <Link className='card-link link'o='/groups'>Make new friends →</Link>
                     </div>
@@ -42,33 +63,33 @@ const HomePage = () => {
                     <div className='card-container'>
                         <img className='card-image' src={cardGridImg3} alt='guy working at a desk'></img>
                         <Link className='card-link link'to='/groups'>Connect →</Link>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='how-meetup-works-blurb'>
-                    <h1>How Meetup works</h1>
-                    <p>Meet new people who share mutual interests</p>
-                    <p>through online and in-person events.</p>
+                    <h2 id='blurb-h2'>How Meetup works</h2>
+                    <p className='blurb-p'>Meet new people who share mutual interests through online and in-person events. It's free to create an account.</p>
+                    {/* <p className='blurb-p'>through online and in-person events.</p> */}
                 </div>
-                <div>
-                    <div>
+                <div className='bottom-cards'>
+                    <div className='bottom-cards-link' id='join'>
                         <img src={handsUpImg} alt='hands up'></img>
                         <Link className='link' to='/groups'>Join a group</Link>
-                        <p>Do what you love, and find your community.</p>
+                        <p className='bottom-cards-p'>Do what you love, and find your community.</p>
                     </div>
-                    <div>
+                    <div className='bottom-cards-link' id='find-an-event'>
                         <img src={ticketImg} alt='illustration of a ticket'></img>
                         <Link className='link' to='/events'>Find an event</Link>
-                        <p>All sorts of events are happening every day!</p>
+                        <p className='bottom-cards-p'>All sorts of events are happening every day!</p>
                     </div>
-                    <div>
+                    <div className='bottom-cards-link' id='start-group'>
                         <img src={groupImg} alt='illustration of a group'></img>
                         <Link className='link' to='/groups/start'>Start a group</Link>
-                        <p>Get people together and explore shared interests.</p>
+                        <p className='bottom-cards-p'>Get people together and explore shared interests.</p>
                     </div>
                 </div>
-                <div>
+                {/* <div className='join-button-container'>
                     <button>Join Meetup</button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
