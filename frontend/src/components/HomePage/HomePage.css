@@ -1,0 +1,27 @@
+* {
+  font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  text-decoration: none;
+}
+
+#welcome-message-h1 {
+  font-weight: bold;
+}
+
+.join-or-sign-up {
+  font-weight: lighter;
+  display: flex;
+}
+
+.cardGrid {
+  display: inline-flex;
+
+}
+
+.card-image {
+  border-radius: 8px;
+}
+
+.link {
+  font-weight: bold;
+  color: rgb(31,143,156);
+}
