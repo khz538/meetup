@@ -1,5 +1,5 @@
 .all-groups-list {
-  margin: 120px 0 0;
+  margin: 120px 0 0 200px;
 }
 
 .navlink {
@@ -26,9 +26,51 @@
 .group-card-wrapper {
   display: flex;
   flex-flow: column;
-  border-bottom: 1px solid #757575;
+  /* border-bottom: 1px solid #757575; */
 }
 
-.group-img-container {
-  border-radius: 5px;
+.group-card {
+  display: flex;
+  flex-flow: row;
+  /* justify-content: space-between; */
+  align-items: flex-start;
+  max-width: 700px;
+  width: 100%;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  margin-bottom: 15px;
+}
+
+.group-img {
+  border-radius: 6px;
+  width: 178px;
+  margin-top: 18px
+  /* padding: 1em; */
+}
+
+.card-right {
+  margin-left: 30px;
+}
+
+.card-top-right {
+  line-height: 1px;
+}
+
+.group-name {
+  font-size: x-large;
+  color: black;
+}
+
+.group-location {
+  font-weight: 400;
+  color: #877457;
+}
+
+.card-about {
+  color: rgb(117, 117, 117);
+}
+
+.card-bottom {
+  display: flex;
+  flex-direction: row;
+  color: rgb(117, 117, 117);
 }

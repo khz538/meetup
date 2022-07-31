@@ -35,16 +35,16 @@ export default function Groups() {
                             </div>
                             <div className='card-right'>
                                 <div className='card-top-right'>
-                                    <h3>{group.name}</h3>
-                                    <h4>{group.city}, {group.state}</h4>
+                                    <h3 className='group-name'>{group.name}</h3>
+                                    <h4 className='group-location'>{group.city}, {group.state}</h4>
                                 </div>
                                 <div className='card-about'>
-                                    <p>{group.about}</p>
+                                    <p className='group-description'>{group.about}</p>
                                 </div>
                                 <div className='card-bottom'>
-                                    <p>{group.numMembers} Members |</p>
-                                    {!!group.private && <p>Private</p>}
-                                    {!group.private && <p>Public</p>}
+                                    <p className='group-member-count'>{group.numMembers} Members |</p>
+                                    {!!group.private && <p className='group-public-private'>&nbsp;Private</p>}
+                                    {!group.private && <p className='group-public-private'>&nbsp;Public</p>}
                                 </div>
                             </div>
                         </div>

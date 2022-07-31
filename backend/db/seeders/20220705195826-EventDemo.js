@@ -14,7 +14,7 @@ module.exports = {
         startDate: new Date('2022-08-16'),
         endDate: new Date('2022-08-17'),
         numAttending: 20,
-        previewImage: 'partyUrl',
+        previewImage: 'https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=',
       },
       {
         groupId: 2,
@@ -27,7 +27,7 @@ module.exports = {
         startDate: new Date('2022-08-16'),
         endDate: new Date('2022-08-17'),
         numAttending: 35,
-        previewImage: 'gradUrl',
+        previewImage: 'https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=',
       },
       {
         groupId: 3,
@@ -40,7 +40,7 @@ module.exports = {
         startDate: new Date('2022-08-16'),
         endDate: new Date('2022-08-17'),
         numAttending: 13,
-        previewImage: 'url4',
+        previewImage: 'https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=',
       },
       {
         groupId: 4,
@@ -53,7 +53,7 @@ module.exports = {
         startDate: new Date('2022-08-16'),
         endDate: new Date('2022-08-17'),
         numAttending: 22,
-        previewImage: 'url5',
+        previewImage: 'https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=',
       },
       {
         groupId: 3,
@@ -66,7 +66,7 @@ module.exports = {
         startDate: new Date('2022-08-16'),
         endDate: new Date('2022-08-17'),
         numAttending: 23,
-        previewImage: 'url6',
+        previewImage: 'https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=',
       },
     ], {});
   },
