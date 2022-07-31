@@ -18,12 +18,16 @@
 }
 
 .userprof-btn {
-  background-color: #cacaca;
+  /* background-color: #cacaca; */
+  background: none;
   border: none;
   padding: 0.3rem 0.4rem;
-  border-radius: 100%;
+  border-radius: 5px;
   margin-right: 1rem;
-  transition: background-color 0.5s;
+  transition: background-color 0.6s;
+  /* width: 200%;
+  height: 200%; */
+  font-size: 25px;
 }
 
 .userprof-btn:hover {
@@ -39,15 +43,16 @@
   padding-bottom: 0.3rem;
   padding-right: 0.7rem;
   padding-left: 0.7rem;
-  border-radius: 0.4rem;
+  border-radius: 5px;
   margin-right: 1rem;
   margin-top: 0.25rem;
   transition: opacity 0.3s;
-  max-width: 6vw;
+  max-width: 5vw;
+  font-size: 15px;
 }
 
 .logout-btn {
-  background-color: #2f8ba2;
+  background-color: rgb(38,143,156);
   opacity: 0.8;
   color: white;
   border: none;
@@ -56,10 +61,11 @@
   padding-bottom: 0.3rem;
   padding-right: 0.7rem;
   padding-left: 0.7rem;
-  border-radius: 0.4rem;
+  border-radius: 5px;
   margin-right: 1rem;
   margin-top: 0.25rem;
   transition: opacity 0.3s;
+  font-size: 15px;
 }
 
 .logout-btn:hover,
