@@ -58,7 +58,7 @@ export default function CreateGroupPage() {
         const newGroup = await dispatch(createGroupThunk(payload));
         history.push(`/groups/${newGroup.id}`);
     };
-    
+
     if (!isLoggedIn) return <DenyAccessPage />
 
     return (
@@ -67,7 +67,7 @@ export default function CreateGroupPage() {
                 <div className='errors-div'>
                     <ul>
                         {hasSubmitted && errors.length > 0 &&
-                        errors.map((error, i) => 
+                        errors.map((error, i) =>
                         <li key={i}>{error}</li>)}
                     </ul>
                 </div>
