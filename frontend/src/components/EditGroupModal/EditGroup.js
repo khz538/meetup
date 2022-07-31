@@ -71,7 +71,7 @@ export default function EditGroup({ group, closeModal }) {
         //         <div className='edit-group-inner'>
         //             <ul>
         //                 {hasSubmitted && errors.length > 0 &&
-        //                 errors.map((error, i) => 
+        //                 errors.map((error, i) =>
         //                 <li key={i}>{error}</li>)}
         //             </ul>
         //             <div className='input-fields'>
@@ -114,10 +114,6 @@ export default function EditGroup({ group, closeModal }) {
         //                 <label>Type</label>
         //                 <select
         //                     placeholder='In-Person'
-        //                     onChange={e => setType(e.target.value)}
-        //                     value={type}
-        //                     required
-        //                 >
         //                     <option value='In-Person'>In person</option>
         //                     <option value='Online'>Online</option>
         //                 </select>
@@ -143,7 +139,7 @@ export default function EditGroup({ group, closeModal }) {
                 <div className='errors-div'>
                     <ul>
                         {errors.length > 0 &&
-                        errors.map((error, i) => 
+                        errors.map((error, i) =>
                         <li key={i}>{error}</li>)}
                     </ul>
                 </div>
