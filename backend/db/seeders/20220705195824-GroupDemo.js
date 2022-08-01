@@ -58,7 +58,7 @@ const seedGroups = [
   },
   {
     organizerId: 1,
-    name: "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK",
+    name: "Just Another Test Group",
     about: "A group to test endpoints6",
     type: "online",
     private: true,
