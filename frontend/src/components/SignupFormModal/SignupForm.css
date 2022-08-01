@@ -8,7 +8,46 @@
 }
 
 .home-signup-btn:hover {
-  /* background: none!important;
-  border:none; */
   color: #008294;
+}
+
+div#modal-content {
+  border-radius: 15px;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-fields {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signup-input {
+  border: solid rgb(200, 200, 200);
+  background-color: rgb(250, 250, 250);
+  border-width: thin;
+  padding: 5px;
+  font-size: 15px;
+  margin-left: 15px;
+}
+
+.signup-btn {
+  font-size: 15px;
+  background-color: #ED1C40;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-weight: bold;
+  opacity: 0.75;
+  justify-content: flex-end;
+}
+
+.signup-btn:hover {
+  opacity: 1;
 }
