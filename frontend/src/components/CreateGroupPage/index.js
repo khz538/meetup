@@ -31,7 +31,9 @@ export default function CreateGroupPage() {
         // if (type !== 'Online' || type !== 'In person') newErrors.push('Type must be either Online or In person');
         // if (privacy === undefined) newErrors.push('Privacy setting must be selected');
         if (!city.length) newErrors.push('City is required');
+        if (city.length > 20) newErrors.push('City name is over 20 letters');
         if (!state.length) newErrors.push('State/Province is required');
+        if (state.length > 2) newErrors.push('Please use 2 letter abbreviation for state');
         setErrors(newErrors);
     }, [name, about, city, state]);
 

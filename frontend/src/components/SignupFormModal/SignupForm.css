@@ -19,6 +19,12 @@ div#modal-content {
   justify-content: center;
 }
 
+.signup-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 .signup-inner-wrapper {
   display: flex;
   flex-direction: column;
