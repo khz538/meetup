@@ -4,7 +4,7 @@ const seedGroups = [
   {
     organizerId: 1,
     name: "Kevin's Group",
-    about: "A group to test endpoints",
+    about: "A group to test endpoints with this really verbose description in order to test the styling of this section. Here comes some stream-of-consciousness writing that I think I have a bad tendency of doing. What's a run-on sentence really? That's completely subjective and arbitrary. One can definitely write an insanely long, but grammatically-correct sentence. And look at Joyce's Ulysses those sentences will go an entire page! How can that be a celebrated work of literature when run-ons are frowned upon?",
     type: "Online",
     private: true,
     city: "Chicago",

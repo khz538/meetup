@@ -66,7 +66,13 @@
 }
 
 .card-about {
+  display: block;
   color: rgb(117, 117, 117);
+  width: 500px;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  /* max-lines:; */
+  /* white-space: nowrap; */
 }
 
 .card-bottom {
