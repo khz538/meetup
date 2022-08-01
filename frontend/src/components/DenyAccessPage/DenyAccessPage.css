@@ -1,0 +1,12 @@
+.not-auth-main-div {
+  /* width:100%;
+  height:100%; */
+  margin:120px;
+  /* background:#f7f7f7; */
+}
+
+.not-auth-outerdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
