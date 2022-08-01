@@ -1,0 +1,77 @@
+.all-events-list {
+  margin: 120px 740px 0 520px;
+}
+
+.navlink {
+  font-weight: 700;
+  font-size: 20px;
+  padding-bottom: 4px;
+  width: 800px;
+  margin-right: auto;
+}
+
+#events-nav-active {
+  color: #008294;
+  border-bottom: 4px solid #008294;
+  margin-right: 15px
+}
+
+#groups-nav {
+  color: #757575;
+}
+
+.suggested-events-text {
+  font-weight: 300;
+  color: #757575;
+}
+
+.event-card-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card {
+  display: flex;
+  align-items: flex-start;
+  max-width: 700px;
+  width: 100%;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  margin-bottom: 15px;
+}
+
+.event-img {
+  border-radius: 6px;
+  width: 178px;
+  margin-top: 18px;
+}
+
+.event-card-right {
+  margin-left: 30px;
+}
+
+.event-startDate {
+  color: #877457;
+  font-weight: 400;
+}
+
+.event-name {
+  font-size: large;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: black;
+  width: 500px;
+}
+
+.event-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  width: 500px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: rgb(117, 117, 117);
+}

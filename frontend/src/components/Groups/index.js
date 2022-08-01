@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getGroups } from '../../store/groups';
-import BottomBar from '../BottomBar';
-import GroupsAndEventsNav from '../GroupsAndEventsNav';
+import './Groups.css';
 
 export default function Groups() {
     const dispatch = useDispatch();
@@ -17,34 +16,42 @@ export default function Groups() {
 
     return (
         <div className='all-groups-list'>
-            <GroupsAndEventsNav />
-            <div>
-                <h4>Suggested Groups</h4>
+            <div className='groups-events-navlinks'>
+                <NavLink to='/events' className='navlink' id='events-nav'>Events</NavLink>
+                <NavLink to='/groups' className='navlink' id='groups-nav-active'>Groups</NavLink>
             </div>
             <div>
+                <h4 className='suggested-groups-text'>Suggested Groups</h4>
+            </div>
+            <div className='group-card-wrapper'>
                 {groups.map((group) => (
                     <Link to={`/groups/${group.id}`}>
-                        <div>
-                            <div className='img-container'>
-                                <img src={group.previewImage}></img>
+                        <div className='group-card'>
+                            <div className='group-img-container'>
+                                <img className='group-img' src={group?.previewImage}></img>
                             </div>
-                            <div>
-                                <div>
-                                    <h3>{group.name}</h3>
-                                    <h4>{group.city}, {group.state}</h4>
-                                    <p>{group.about}</p>
+                            <div className='card-right'>
+                                <div className='card-top-right'>
+                                    <h3 className='group-name'>{group.name}</h3>
+                                    <div className='group-location'>
+                                    <h4 className='group-city'>{group.city},&nbsp;{group.state}</h4>
+
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>{group.numMembers} Members</p>
-                                    {!!group.private && <p>Private</p>}
-                                    {!group.private && <p>Public</p>}
+                                <div className='card-about'>
+                                    <p className='group-description'>{group.about}</p>
+                                </div>
+                                <div className='card-bottom'>
+                                    <p className='group-member-count'>{group.numMembers} Members |</p>
+                                    {!!group.private && <p className='group-public-private'>&nbsp;Private</p>}
+                                    {!group.private && <p className='group-public-private'>&nbsp;Public</p>}
                                 </div>
                             </div>
                         </div>
                     </Link>
                 ))}
             </div>
-            <BottomBar />
+            {/* <BottomBar /> */}
         </div>
     )
 };
