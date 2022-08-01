@@ -1,11 +1,13 @@
 .all-groups-list {
-  margin: 120px 0 0 200px;
+  margin: 120px 740px 0 520px;
 }
 
 .navlink {
   font-weight: 700;
   font-size: 20px;
   padding-bottom: 4px;
+  width: 800px;
+  margin-right: auto;
 }
 
 #events-nav {
@@ -52,12 +54,14 @@
 }
 
 .card-top-right {
-  line-height: 1px;
+  line-height: 25px;
 }
 
 .group-name {
   font-size: x-large;
   color: black;
+  word-wrap: break-word;
+  width: 500px;
 }
 
 .group-location {
@@ -66,13 +70,13 @@
 }
 
 .card-about {
-  display: block;
-  color: rgb(117, 117, 117);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   width: 500px;
   text-overflow: ellipsis;
   overflow:hidden;
-  /* max-lines:; */
-  /* white-space: nowrap; */
+  color: rgb(117, 117, 117);
 }
 
 .card-bottom {

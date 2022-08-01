@@ -36,7 +36,10 @@ export default function Groups() {
                             <div className='card-right'>
                                 <div className='card-top-right'>
                                     <h3 className='group-name'>{group.name}</h3>
-                                    <h4 className='group-location'>{group.city}, {group.state}</h4>
+                                    <div className='group-location'>
+                                    <h4 className='group-city'>{group.city},&nbsp;{group.state}</h4>
+
+                                    </div>
                                 </div>
                                 <div className='card-about'>
                                     <p className='group-description'>{group.about}</p>
@@ -51,7 +54,7 @@ export default function Groups() {
                     </Link>
                 ))}
             </div>
-            <BottomBar />
+            {/* <BottomBar /> */}
         </div>
     )
 };
