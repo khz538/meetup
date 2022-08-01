@@ -2,6 +2,10 @@
 
 This clone aims to mimic both the look and functionality of meetup.com.
 
+## [Live Link](https://khz538-meetup-clone.herokuapp.com/)
+
+![](Screencast%20from%2008-01-2022%2007_20_53%20AM.gif)
+
 ## Technologies
 
 #### Front-End
