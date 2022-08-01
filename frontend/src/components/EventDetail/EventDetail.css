@@ -48,3 +48,8 @@
   max-width: 100%;
   font-size: 15px;
 }
+
+.event-delete-button:hover {
+  transition: 0.2s;
+  opacity: 1;
+}

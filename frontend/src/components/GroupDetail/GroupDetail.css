@@ -35,6 +35,11 @@
   transition: opacity 0.3s;
   font-size: 15px;
 }
+.group-btn:hover,
+.group-delete-btn:hover {
+  transition: 0.2s;
+  opacity: 1;
+}
 
 .group-delete-btn {
   background-color: #ed1c40;
