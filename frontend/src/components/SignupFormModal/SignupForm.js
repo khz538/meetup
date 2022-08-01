@@ -98,7 +98,7 @@ function SignupForm() {
             />
           </label>
         </div>
-        <button className="signup-btn" type="submit">Sign Up</button>
+          <button className="signup-btn" type="submit">Sign Up</button>
         </div>
         <div className="signup-validation-errors">
           <ul className="error-list">

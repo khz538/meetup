@@ -44,7 +44,7 @@ div#modal-content {
   border-width: thin;
   padding: 5px;
   font-size: 15px;
-  margin-left: 15px;
+  /* margin-left: 15px; */
   /* margin-top: 15px; */
   /* margin-bottom: 15px; */
 }
