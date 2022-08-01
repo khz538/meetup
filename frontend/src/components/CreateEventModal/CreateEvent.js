@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { createEventThunk, getOneEventThunk } from '../../store/events';
 import DenyAccessPage from '../DenyAccessPage';
 // import { getGroupById } from '../../store/groups';
+import './CreateEvent.css';
 
 export default function CreateEvent({ group }) {
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export default function CreateEvent({ group }) {
         if (!startDate) newErrors.push('Start date is required');
         if (!endDate) newErrors.push('End date is required');
         setErrors(newErrors);
-        console.log(errors)
+        // console.log(errors)
     }, [name, capacity, price, description, startDate, endDate]);
 
     async function handleSubmit(e) {
@@ -69,7 +70,7 @@ export default function CreateEvent({ group }) {
                 endDate: newEndDate,
             };
         } else {
-            setVenueId(1)
+            // setVenueId(1)
             payload = {
                 venueId,
                 groupId: group.id,
@@ -82,7 +83,7 @@ export default function CreateEvent({ group }) {
                 endDate: newEndDate,
             };
         };
-        console.log(payload);
+        // console.log(payload);
         const newEvent = await dispatch(createEventThunk(payload));
         const getNewEvent = await dispatch(getOneEventThunk(newEvent.id));
         // console.log(newEvent);
@@ -109,8 +110,8 @@ export default function CreateEvent({ group }) {
                         onChange={e => setType(e.target.value)}
                         value={type}
                     >
-                        <option value='In person'>In person</option>
                         <option value='Online'>Online</option>
+                        <option value='In person'>In person</option>
                     </select>
                     {type==='In person' &&
                         <>
