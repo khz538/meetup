@@ -11,17 +11,17 @@ export default function EventDetail() {
     const events = useSelector(state => state.events);
     // console.log(events)
     const sessionUser = useSelector(state => state.session.user);
-    
+
     async function thunks(id) {
         const awaitEvent = await dispatch(getOneEventThunk(id));
         // console.log(awaitEvent);
         // const awaitAttendees = await dispatch(getEventAttendeesThunk(id));
     };
-    
+
     useEffect(() => {
         thunks(eventId);
     }, [dispatch]);
-    
+
     if (!events || Object.values(events).length === 0) return null;
     const event = events[eventId];
     // const attendees = events.attendees;
@@ -38,27 +38,31 @@ export default function EventDetail() {
     const isOrganizer = sessionUser?.id === event?.Group?.organizerId;
     // console.log(isOrganizer);
     const isOnline = event?.Venue?.city === 'Online';
-    const isLoggedIn = sessionUser;
+    // const isLoggedIn = sessionUser;
 
     return (
-        <div>
-            <div>
-                <img src={event.previewImage} alt='event-image'></img>
-                <div>
-                    <h1>{event.name}</h1>
+        <div className='event-detail-page-wrap'>
+            <div className='event-detail-inner-wrap'>
+                <div className='image-and-description'>
+                    <h1 className='event-detail-name'>{event.name}</h1>
+                    <img src={event.previewImage} alt='event-image'></img>
+                    <h2>Details</h2>
                     <p>{event.description}</p>
-                    <p>{event.numAttending}</p>
-                    <p>{event.Group.name}</p>
-                    {!isOnline && <p>{event.Venue.city}, {event.Venue.state}</p>}
-                    {isOnline && <p>Online</p>}
-                    {isOrganizer && <button className='delete-button' onClick={() => handleDelete(eventId)}>Delete This Event</button>}
+                </div>
+                <div className='event-detail-right'>
+                    <div>
+                        <p><i className="fa-solid fa-id-badge"></i>&nbsp;&nbsp;&nbsp;{event.numAttending} Attending</p>
+                        <p><i className="fa-solid fa-users"></i>&nbsp;&nbsp;{event.Group.name}</p>
+                    </div>
+                    {!isOnline && <p><i className="fa-solid fa-location-dot"></i>&nbsp;&nbsp;{event.Venue.city}, {event.Venue.state}</p>}
+                    {isOnline && <p><i className="fa-solid fa-location-dot"></i>&nbsp;&nbsp;&nbsp;Location: Online</p>}
+                    {isOrganizer && <button className='event-delete-button' onClick={() => handleDelete(eventId)}>Delete This Event</button>}
                 </div>
                 {/* <div>
                     <p>{attendees.Attendees.map(attendee => (
                         <p>{attendee.firstName}</p>
                     ))}</p>
                 </div> */}
-
             </div>
         </div>
     );

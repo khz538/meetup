@@ -15,7 +15,7 @@ export default function GroupDetail() {
     // const group = groups[groupId];
     // console.log('group',group);
     const sessionUser = useSelector(state => state.session.user);
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
     // console.log('++++++++', group);
 
     const isOrganizer = sessionUser?.id === group?.organizerId;

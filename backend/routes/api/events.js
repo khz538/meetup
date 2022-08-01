@@ -399,7 +399,7 @@ router.get('/:eventId', async (req, res, next) => {
         'lat',
         'lng'
     ];
-    
+
     const event = await Event.findByPk(eventId, {
         attributes: {
             include: eventPayload
@@ -451,7 +451,7 @@ router.get('/:eventId', async (req, res, next) => {
     delete eventJSON.Group.createdAt;
     delete eventJSON.Group.updatedAt;
     delete eventJSON.Venue.groupId;
-    delete eventJSON.previewImage;
+    // delete eventJSON.previewImage;
 
     return res.json(eventJSON);
 });
