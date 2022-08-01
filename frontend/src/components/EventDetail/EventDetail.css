@@ -17,6 +17,7 @@
 .image-and-description {
   display: flex;
   flex-flow: column;
+  width: fit-content;
 }
 
 .image-and-description > img {
