@@ -19,12 +19,23 @@ div#modal-content {
   justify-content: center;
 }
 
+.signup-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  /* width: 20em;
+  height: 30em; */
+}
+
 .signup-fields {
   display: flex;
   flex-direction: column;
   padding: 5px;
-  justify-content: space-between;
+  /* justify-content: space-evenly; */
   align-items: center;
+  width: 25rem;
+  height: 25rem;
 }
 
 .signup-input {
@@ -34,10 +45,12 @@ div#modal-content {
   padding: 5px;
   font-size: 15px;
   margin-left: 15px;
+  /* margin-top: 15px; */
+  /* margin-bottom: 15px; */
 }
 
 .signup-btn {
-  font-size: 15px;
+  font-size: 18px;
   background-color: #ED1C40;
   color: white;
   border: none;
@@ -50,4 +63,12 @@ div#modal-content {
 
 .signup-btn:hover {
   opacity: 1;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-bottom: 4px;
 }

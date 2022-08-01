@@ -33,7 +33,9 @@ function SignupForm() {
 
   return (
     <div className="signup-wrapper">
+      <h2 className="signup-title">Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <div className="signup-inner-wrapper">
         <div className="signup-fields">
           <label>
             First Name
@@ -97,6 +99,7 @@ function SignupForm() {
           </label>
         </div>
         <button className="signup-btn" type="submit">Sign Up</button>
+        </div>
         <div className="signup-validation-errors">
           <ul className="error-list">
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
