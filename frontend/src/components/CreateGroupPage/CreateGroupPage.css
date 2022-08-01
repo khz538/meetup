@@ -32,3 +32,7 @@
 .submit-new-group:hover {
   opacity: 1;
 }
+
+.errors-div {
+  max-width: 200px;
+}

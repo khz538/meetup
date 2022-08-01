@@ -135,6 +135,7 @@ export default function EditGroup({ group, closeModal }) {
         //     </form>
         // </div>
         <div className='edit-group-page'>
+            <h2>Edit Group</h2>
             <form onSubmit={handleSubmit}>
                 <div className='errors-div'>
                     <ul>
@@ -183,6 +184,7 @@ export default function EditGroup({ group, closeModal }) {
                         />
                         <label>Type</label>
                         <select
+                            className='input-field'
                             placeholder='In-Person'
                             onChange={e => setType(e.target.value)}
                             value={type}
@@ -193,6 +195,7 @@ export default function EditGroup({ group, closeModal }) {
                         </select>
                         <label>Group Visibility</label>
                         <select
+                            className='input-field'
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
                             required
