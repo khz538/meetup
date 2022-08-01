@@ -46,7 +46,7 @@ module.exports = {
         groupId: 4,
         venueId: 4,
         name: "4444444",
-        description: "party!",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!",
         type: "Online",
         capacity: 37,
         price: 35.60,
@@ -58,7 +58,7 @@ module.exports = {
       {
         groupId: 3,
         venueId: 5,
-        name: "5555555",
+        name: "5555555 Let's make this one really long now and see how it holds up. Hopefully it will wrap and be good!!!!!! Wait let's add another line here.",
         description: "party!",
         type: "In person",
         capacity: 57,

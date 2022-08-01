@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createGroupThunk } from '../../store/groups';
-// import BottomBar from '../BottomBar';
 import DenyAccessPage from '../DenyAccessPage';
+import './CreateGroupPage.css';
 
 export default function CreateGroupPage() {
     const dispatch = useDispatch();
