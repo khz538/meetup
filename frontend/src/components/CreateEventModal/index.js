@@ -8,7 +8,7 @@ function CreateEventModal({ group }) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Create an Event</button>
+      <button className='group-btn' onClick={() => setShowModal(true)}>Create an Event</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreateEvent group={group} />

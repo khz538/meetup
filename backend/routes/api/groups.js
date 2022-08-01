@@ -282,7 +282,7 @@ router.get(
                 groupJson.Events = events;
                 groupJson.Members = groupMembers;
                 delete groupJson.Organizer.username;
-                delete groupJson.previewImage;
+                // delete groupJson.previewImage;
                 return res.json(groupJson);
             } else {
                 const group = await Group.findByPk(groupId, {
@@ -324,7 +324,7 @@ router.get(
                 groupJson.Events = events;
                 groupJson.Members = groupMembers;
                 delete groupJson.Organizer.username;
-                delete groupJson.previewImage;
+                // delete groupJson.previewImage;
                 return res.json(groupJson);
             }
         } else {
@@ -367,7 +367,7 @@ router.get(
             groupJson.Events = events;
             groupJson.Members = groupMembers;
             delete groupJson.Organizer.username;
-            delete groupJson.previewImage;
+            // delete groupJson.previewImage;
             return res.json(groupJson);
         }
     }

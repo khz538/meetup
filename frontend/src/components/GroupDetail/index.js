@@ -47,15 +47,17 @@ export default function GroupDetail() {
     return (
         <div className='group-detail-page'>
             <div className='group-detail-upper'>
-                <img src={group.previewImage} alt='group-image' className='group-image'></img>
-                <div>
+                <div className='group-detail-img-container'>
+                    <img src={group.previewImage} alt='group-image' className='group-image'></img>
+                </div>
+                <div className='group-detail-upper-right'>
                     <h1>{group.name}</h1>
-                    <p>{group.numMembers} member(s)</p>
-                    <p>Owner: {group.Organizer && group.Organizer.firstName}</p>
-                    <p>{group.city}, {group.state}</p>
-                    {isOrganizer && <EditGroupModal group={group} />}
-                    {isOrganizer && <button onClick={() => handleDelete(groupId)}>Delete This Group</button>}
-                    {isOrganizer && <CreateEventModal group={group} />}
+                    <p><i className="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;Organized by {group.Organizer && group.Organizer.firstName}</p>
+                    <p><i className="fa-solid fa-user-group"></i>&nbsp;&nbsp;{group.numMembers} member(s)</p>
+                    <p><i className="fa-solid fa-location-dot"></i>&nbsp;&nbsp;&nbsp;{group.city}, {group.state}</p>
+                    {isOrganizer && <EditGroupModal className='group-btn'group={group} />}
+                    {isOrganizer && <CreateEventModal className='group-btn' group={group} />}
+                    {isOrganizer && <button className='group-delete-btn' onClick={() => handleDelete(groupId)}>Delete This Group</button>}
                 </div>
             </div>
             <div className='group-detail-lower'>

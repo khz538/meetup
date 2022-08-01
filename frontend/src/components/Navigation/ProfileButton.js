@@ -46,6 +46,7 @@ function ProfileButton({ user }) {
           {/* <Link className="userprof-link" to="/user-profile">
             User Profile
           </Link> */}
+          <Link className='start-group-link' to='/groups/start'>Start a group</Link>
           <div>
             <button className="logout-btn" onClick={logout}>
               Log Out

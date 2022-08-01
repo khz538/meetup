@@ -72,7 +72,7 @@ export default function CreateEvent({ group }) {
         } else {
             // setVenueId(1)
             payload = {
-                venueId,
+                venueId: 4,
                 groupId: group.id,
                 name,
                 type,
@@ -115,7 +115,7 @@ export default function CreateEvent({ group }) {
                         <option value='Online'>Online</option>
                         <option value='In person'>In person</option>
                     </select>
-                    {type==='In person' &&
+                    {/* {type==='In person' &&
                         <>
                             <label>Venue ID</label>
                             <select
@@ -128,14 +128,14 @@ export default function CreateEvent({ group }) {
                                 value={venueId}
                                 onChange={e => setVenueId(e.target.value)}
                             >
-                                {/* <option value="1">1</option> */}
+                                <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select>
                         </>
 
-                    }
+                    } */}
                     <label>Name</label>
                     <input
                         placeholder='Event Name'

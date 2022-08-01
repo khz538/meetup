@@ -36,6 +36,10 @@
   max-height: auto;
 }
 
+.card-link:hover {
+  opacity: .9;
+}
+
 .link {
   font-weight: bold;
   color: rgb(31,143,156);

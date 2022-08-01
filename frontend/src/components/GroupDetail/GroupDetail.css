@@ -1,0 +1,70 @@
+.group-detail-page {
+  margin: 120px 700px 0 450px;
+  display: flex;
+  flex-flow: column;
+}
+
+.group-detail-upper {
+  display: flex;
+  flex-flow: row;
+  padding: 10px;
+}
+
+.group-image {
+  border-radius: 6px;
+
+}
+
+.group-detail-upper-right {
+  margin-left: 50px;
+}
+
+.group-btn {
+  background-color: rgb(38,143,156);
+  opacity: 0.8;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  border-radius: 5px;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+  transition: opacity 0.3s;
+  font-size: 15px;
+}
+
+.group-delete-btn {
+  background-color: #ed1c40;
+  opacity: 0.8;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  border-radius: 5px;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+  transition: opacity 0.3s;
+  max-width: 100%;
+  font-size: 15px;
+}
+
+.group-detail-lower {
+  display: flex;
+  background-color: #F6F7F8;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.group-about-section {
+  max-width: 630px;
+}
+
+.members {
+  margin-right: 100px;
+}

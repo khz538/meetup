@@ -17,6 +17,16 @@
   margin: 0.25rem 0;
 }
 
+.start-group-link  {
+  margin: 0.25rem 0;
+  color: black;
+  font-weight: bold;
+}
+.start-group-link:hover {
+  color: rgb(38,143,156);
+  font-weight: bold;
+}
+
 .userprof-btn {
   /* background-color: #cacaca; */
   background: none;

@@ -9,7 +9,7 @@ function EditGroupModal({ group }) {
   const closeModal = (bool) => setShowModal(bool);
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit Group</button>
+      <button className='group-btn' onClick={() => setShowModal(true)}>Edit Group</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditGroup group={group} closeModal={closeModal} />
