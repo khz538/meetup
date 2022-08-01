@@ -22,35 +22,70 @@ function LoginForm() {
   };
 
   return (
-    <div className="login-wrapper">
-      <h2 className="login-title">Log In</h2>
+    // <div className="login-wrapper">
+    //   <h2 className="login-title">Log In</h2>
+    //   <form onSubmit={handleSubmit}>
+    //     <ul>
+    //       {errors.map((error, idx) => (
+    //         <li key={idx}>{error}</li>
+    //       ))}
+    //     </ul>
+    //     <label>
+    //       Username or Email
+    //       <input
+    //         className="login-input"
+    //         type="text"
+    //         value={credential}
+    //         onChange={(e) => setCredential(e.target.value)}
+    //         required
+    //       />
+    //     </label>
+    //     <label>
+    //       Password
+    //       <input
+    //         className="login-input"
+    //         type="password"
+    //         value={password}
+    //         onChange={(e) => setPassword(e.target.value)}
+    //         required
+    //       />
+    //     </label>
+    //     <button className='login-btn' type="submit">Log In</button>
+    //   </form>
+    // </div>
+    <div className="signup-wrapper">
+      <h2 className="signup-title">Log In</h2>
       <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Username or Email
-          <input
-            className="login-input"
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            className="login-input"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button className='login-btn' type="submit">Log In</button>
+        <div className="signup-inner-wrapper">
+        <div className="signup-fields">
+          <label>
+            Username or Email
+            <input
+              className="signup-input"
+              type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Password
+            <input
+              className="signup-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+          <button className="signup-btn" type="submit">Sign Up</button>
+        </div>
+        <div className="signup-validation-errors">
+          <ul className="error-list">
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>
+        </div>
       </form>
     </div>
   );
