@@ -91,7 +91,7 @@ router.post('/:groupId/events/new', checkAuth, async (req, res, next) => {
     const currentUserStatus = await GroupMember.findOne({
         where: {groupId, userId}
     });
-
+    const previewImage = "https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=";
     if (!currentUserStatus) {
         throw new Error ('You are not a member of this group');
     }
@@ -108,6 +108,7 @@ router.post('/:groupId/events/new', checkAuth, async (req, res, next) => {
                     description,
                     startDate,
                     endDate,
+                    previewImage,
                 });
                 const newEventJSON = newEvent.toJSON();
                 delete newEventJSON.updatedAt;
@@ -553,6 +554,8 @@ router.post('/', checkAuth, async (req, res) => {
     if (private === 'false') private = false;
     const numMembers = 1;
     const organizerId = req.user.id;
+    const previewImage="https://media.istockphoto.com/photos/dramatic-sunset-downtown-chicago-picture-id1204331594?k=20&m=1204331594&s=612x612&w=0&h=A3jtAUu-SlWPtYiaytmeI7nuU-k_OIDpIWfyeiTk47Y=";
+
     try {
         let newGroup = await Group.create({
             organizerId,
@@ -563,6 +566,7 @@ router.post('/', checkAuth, async (req, res) => {
             city,
             state,
             numMembers,
+            previewImage
         });
         const newGroupMember = await GroupMember.create({
             userId: organizerId,
