@@ -43,7 +43,7 @@ export default function CreateEvent({ group }) {
         if (!startDate) newErrors.push('Start date is required');
         if (!endDate) newErrors.push('End date is required');
         setErrors(newErrors);
-        // console.log(errors)
+        console.log(errors)
     }, [name, capacity, price, description, startDate, endDate]);
 
     async function handleSubmit(e) {
@@ -56,6 +56,7 @@ export default function CreateEvent({ group }) {
         // console.log(newStartDate, newEndDate);
         let payload;
         if (type === 'Online') {
+            // setVenueId(1)
             payload = {
                 venueId: 1,
                 groupId: group.id,
@@ -68,6 +69,7 @@ export default function CreateEvent({ group }) {
                 endDate: newEndDate,
             };
         } else {
+            setVenueId(1)
             payload = {
                 venueId,
                 groupId: group.id,
@@ -80,18 +82,18 @@ export default function CreateEvent({ group }) {
                 endDate: newEndDate,
             };
         };
-
+        console.log(payload);
         const newEvent = await dispatch(createEventThunk(payload));
         const getNewEvent = await dispatch(getOneEventThunk(newEvent.id));
         // console.log(newEvent);
         history.push(`/events/${newEvent.id}`);
     };
-    
+
     if (!group) return null;
     // console.log(group)
     const isLoggedIn = sessionUser;
     if (!isLoggedIn) return <DenyAccessPage />;
-    
+
     return (
         <div className='create-event-page'>
             <form onSubmit={handleSubmit}>
@@ -110,21 +112,26 @@ export default function CreateEvent({ group }) {
                         <option value='In person'>In person</option>
                         <option value='Online'>Online</option>
                     </select>
-                    <label>Venue ID</label>
-                    <select
-                        // placeholder='Venue ID 1 is Online'
-                        // className='input-field'
-                        // type='number'
-                        // step='1'
-                        // min='1'
-                        value={venueId}
-                        onChange={e => setVenueId(e.target.value)}
-                    >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    {type==='In person' &&
+                        <>
+                            <label>Venue ID</label>
+                            <select
+                                // placeholder='Venue ID 1 is Online'
+                                // className='input-field'
+                                // type='number'
+                                // step='1'
+                                // min='1'
+                                value={venueId}
+                                onChange={e => setVenueId(e.target.value)}
+                            >
+                                {/* <option value="1">1</option> */}
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </>
+
+                    }
                     <label>Name</label>
                     <input
                         placeholder='Event Name'
