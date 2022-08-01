@@ -25,7 +25,8 @@ export default function CreateGroupPage() {
         const newErrors = [];
         if (name.length > 60) newErrors.push('Name must be shorter than 60 characters');
         if (!name.length) newErrors.push('Name is required');
-        if (about.length < 50 || about.length > 1000) newErrors.push('About must be longer than 50 characters and shorter than 1000');
+        if (about.length < 50) newErrors.push('About must exceed 50 characters');
+        if (about.length > 10000) newErrors.push('About section must not exceed 10,000 characters');
         if (!about.length) newErrors.push('About is required')
         // if (type !== 'Online' || type !== 'In person') newErrors.push('Type must be either Online or In person');
         // if (privacy === undefined) newErrors.push('Privacy setting must be selected');
@@ -63,14 +64,8 @@ export default function CreateGroupPage() {
 
     return (
         <div className='create-group-page'>
+            <h2 className='create-group-title'>Create a Group</h2>
             <form onSubmit={handleSubmit}>
-                <div className='errors-div'>
-                    <ul>
-                        {hasSubmitted && errors.length > 0 &&
-                        errors.map((error, i) =>
-                        <li key={i}>{error}</li>)}
-                    </ul>
-                </div>
                 <div className='create-group-inner'>
                     <div className='input-fields'>
                         <label>Name</label>
@@ -111,6 +106,7 @@ export default function CreateGroupPage() {
                         />
                         <label>Type</label>
                         <select
+                            className='input-field'
                             placeholder='In-Person'
                             onChange={e => setType(e.target.value)}
                             value={type}
@@ -119,8 +115,9 @@ export default function CreateGroupPage() {
                             <option value='In-Person'>In person</option>
                             <option value='Online'>Online</option>
                         </select>
-                        <label>Group Visibility</label>
+                        <label>Group Privacy</label>
                         <select
+                            className='input-field'
                             onChange={e => setPrivacy(e.target.value)}
                             value={privacy}
                             required
@@ -133,12 +130,19 @@ export default function CreateGroupPage() {
                     <button
                         className='submit-new-group'
                         type='submit'
-                        disabled={errors.length}
+                        // disabled={errors.length}
                     >
                         Create Group
                     </button>
                 </div>
             </form>
+            <div className='errors-div'>
+                    <ul>
+                        {hasSubmitted && errors.length > 0 &&
+                        errors.map((error, i) =>
+                        <li key={i}>{error}</li>)}
+                    </ul>
+                </div>
             {/* <BottomBar /> */}
         </div>
     )
