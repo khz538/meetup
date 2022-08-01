@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { getGroups } from '../../store/groups';
-import BottomBar from '../BottomBar';
-import GroupsTopNavLinkActive from '../GroupsTopNavLinkActive';
-import EventsTopNavLink from '../EventsTopNavLink';
 import './Groups.css';
 
 export default function Groups() {
