@@ -1,0 +1,36 @@
+.create-event-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 250px;
+}
+
+.event-input {
+  border: solid rgb(200, 200, 200);
+  background-color: rgb(250, 250, 250);
+  border-width: thin;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 5px;
+  width: 100%
+}
+
+.create-event-button {
+  font-size: 18px;
+  background-color: #ED1C40;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-weight: bold;
+  opacity: 0.75;
+  /* justify-content: flex-end; */
+  /* margin-top: 10px;
+  margin-bottom: 20px; */
+  margin: 15px auto 25px auto;
+  width: 100%
+}
+
+.create-event-button:hover {
+  opacity: 1;
+}

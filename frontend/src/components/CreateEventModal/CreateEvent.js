@@ -96,7 +96,8 @@ export default function CreateEvent({ group }) {
     if (!isLoggedIn) return <DenyAccessPage />;
 
     return (
-        <div className='create-event-page'>
+        <div className='create-event-wrapper'>
+            <h2>Create an Event</h2>
             <form onSubmit={handleSubmit}>
                 <div className='errors-div'>
                     <ul>
@@ -107,6 +108,7 @@ export default function CreateEvent({ group }) {
                 <div className='input-fields'>
                     <label>Type</label>
                     <select
+                        className='event-input'
                         onChange={e => setType(e.target.value)}
                         value={type}
                     >
@@ -122,6 +124,7 @@ export default function CreateEvent({ group }) {
                                 // type='number'
                                 // step='1'
                                 // min='1'
+                                className='event-input'
                                 value={venueId}
                                 onChange={e => setVenueId(e.target.value)}
                             >
@@ -136,7 +139,7 @@ export default function CreateEvent({ group }) {
                     <label>Name</label>
                     <input
                         placeholder='Event Name'
-                        className='input-field'
+                        className='event-input'
                         type='text'
                         value={name}
                         onChange={e => setName(e.target.value)}
@@ -145,7 +148,7 @@ export default function CreateEvent({ group }) {
                     <label>Capacity</label>
                     <input
                         placeholder='capacity'
-                        className='input-field'
+                        className='event-input'
                         type='text'
                         // step='1'
                         // min='0'
@@ -156,7 +159,7 @@ export default function CreateEvent({ group }) {
                     <label>Price</label>
                     <input
                         placeholder='Price'
-                        className='input-field'
+                        className='event-input'
                         type='number'
                         min='0'
                         step='.01'
@@ -166,7 +169,7 @@ export default function CreateEvent({ group }) {
                     />
                     <label>Description</label>
                     <input
-                        className='input-field'
+                        className='event-input'
                         id='description-field'
                         type='text'
                         value={description}
@@ -175,7 +178,7 @@ export default function CreateEvent({ group }) {
                     />
                     <label>Start Date/Time</label>
                     <input
-                        className='input-field'
+                        className='event-input'
                         id='start-date'
                         type='datetime-local'
                         value={startDate}
@@ -186,7 +189,7 @@ export default function CreateEvent({ group }) {
                     />
                     <label>End Date/Time</label>
                     <input
-                        className='input-field'
+                        className='event-input'
                         id='end-date'
                         type='datetime-local'
                         min={startDate}
