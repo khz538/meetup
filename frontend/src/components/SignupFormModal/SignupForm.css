@@ -66,6 +66,7 @@ div#modal-content {
   font-weight: bold;
   opacity: 0.75;
   justify-content: flex-end;
+  cursor: pointer;
 }
 
 .signup-btn:hover {
