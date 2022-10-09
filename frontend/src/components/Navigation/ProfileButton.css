@@ -38,6 +38,7 @@
   /* width: 200%;
   height: 200%; */
   font-size: 25px;
+  cursor: pointer;
 }
 
 .userprof-btn:hover {
