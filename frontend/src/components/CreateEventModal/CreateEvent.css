@@ -28,7 +28,8 @@
   /* margin-top: 10px;
   margin-bottom: 20px; */
   margin: 15px auto 25px auto;
-  width: 100%
+  width: 100%;
+  cursor: pointer;
 }
 
 .create-event-button:hover {

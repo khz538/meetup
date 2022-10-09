@@ -24,7 +24,7 @@
   /* margin-left: 50px; */
   display: flex;
   flex-flow: column;
-  margin: 0 1.5em;
+  margin: 0 auto 0 1.5em;
 }
 
 .group-btn {

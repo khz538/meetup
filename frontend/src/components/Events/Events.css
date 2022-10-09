@@ -1,5 +1,6 @@
 .all-events-list {
-  margin: 120px 740px 0 520px;
+  margin: 120px 30vw 0 30vw;
+  /* margin: auto; */
 }
 
 .navlink {
