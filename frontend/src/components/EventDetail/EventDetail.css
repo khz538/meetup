@@ -1,5 +1,4 @@
 .event-detail-page-wrap {
-  margin: 120px 600px 0600px;
   display: flex;
   flex-flow: column;
   /* max-width: 100%;
@@ -7,6 +6,7 @@
 }
 
 .event-detail-inner-wrap {
+  margin: auto;
   display: flex;
 }
 
@@ -17,21 +17,23 @@
 .image-and-description {
   display: flex;
   flex-flow: column;
-  width: fit-content;
+  width: 35vw;
+  word-break: break-word;
 }
 
 .image-and-description > img {
-  width: 600px;
+  width: 35vw;
   border-radius: 6px;
 }
 
 .event-detail-right {
   margin-left: 40px;
-  width: 300px;
-  margin-top: 65px;
+  width: 10vw;
+  margin-top: 105px;
 }
 
 .event-delete-button {
+  cursor: pointer;
   background-color: #ed1c40;
   opacity: 0.8;
   color: white;
