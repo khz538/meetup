@@ -24,6 +24,7 @@
 .image-and-description > img {
   width: 35vw;
   border-radius: 6px;
+  object-fit: cover;
 }
 
 .event-detail-right {

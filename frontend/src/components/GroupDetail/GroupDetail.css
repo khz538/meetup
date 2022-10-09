@@ -8,7 +8,7 @@
 .group-detail-upper {
   display: flex;
   flex-flow: row;
-  padding: 10px;
+  padding: 20px;
   margin: auto;
   width: 50vw;
 }
@@ -17,10 +17,14 @@
   border-radius: 6px;
   width: 37vw;
   min-height: 100%;
+  object-fit: cover;
 }
 
 .group-detail-upper-right {
-  margin-left: 50px;
+  /* margin-left: 50px; */
+  display: flex;
+  flex-flow: column;
+  margin: 0 1.5em;
 }
 
 .group-btn {
@@ -39,6 +43,7 @@
   transition: opacity 0.3s;
   font-size: 15px;
   width: 100%;
+  cursor: pointer;
 }
 .group-btn:hover,
 .group-delete-btn:hover {
@@ -63,12 +68,13 @@
   max-width: 100%;
   font-size: 15px;
   width: 100%;
+  cursor: pointer;
 }
 
 .group-detail-lower {
   display: flex;
   background-color: #F6F7F8;
-  padding: 20px;
+  /* padding: 20px; */
   justify-content: space-between;
   margin: auto;
   width: 50vw;
@@ -77,12 +83,13 @@
 .group-about-section {
   max-width: 630px;
   width: 37vw;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
 .members {
-  /* margin-right: 100px; */
-  /* padding-left: 1em; */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding-top: 20px;
 }
